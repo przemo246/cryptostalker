@@ -1,0 +1,43 @@
+$color-primary: #00c590;
+$color-primary-dark: #00ac7e;
+$color-secondary: #333;
+$green-linear-gradient: linear-gradient(to right bottom, #45c5a2, #00c590);
+$yellow-linear-gradient: linear-gradient(to right bottom, #fdd159, #fab700);
+$blue-linear-gradient: linear-gradient(to right bottom, #65cafc, #00a8fc);
+$black-linear-gradient: linear-gradient(to right bottom, #616161, #333);
+$box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+$box-shadow-1: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+  rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+$color-grey-light-1: #fafafa;
+$color-grey-light-2: #dcdcdc;
+$color-grey-dark-1: #616161;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  padding: 3rem 0;
+  line-height: 1.6;
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
+  color: $color-secondary;
+  min-height: 100vh;
+  background-color: $color-primary;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
