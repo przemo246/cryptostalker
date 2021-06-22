@@ -1,0 +1,22 @@
+{
+  "name": "cryptostalker",
+  "version": "1.0.0",
+  "description": "Cryptostalker is a web app that allows you track the latest information on cryptocurrencies including news and prices of the crypto with the biggest market cap. The app also provides a portfolio functionality where you can add and store assets that you hold.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Przemo246/Cryptostalker.git"
+  },
+  "keywords": [
+    "cryptocurrencies"
+  ],
+  "author": "Przemyslaw Welenc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Przemo246/Cryptostalker/issues"
+  },
+  "homepage": "https://github.com/Przemo246/Cryptostalker#readme"
+}
