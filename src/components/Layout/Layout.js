@@ -1,4 +1,5 @@
 import { Navigation } from './Navigation';
+import { Heading } from './Heading';
 
 export const Layout = () => {
   return (
@@ -6,15 +7,7 @@ export const Layout = () => {
       <Navigation />
       <main className="main">
         <header className="header">
-          <div className="heading-container">
-            <h1 className="heading-primary">
-              <span id="greet"></span>
-              <span className="green-highlight">Anonymous!</span>
-            </h1>
-            <span className="greeting-subtitle">
-              this is a greeting in <span id="lang"></span> 😉
-            </span>
-          </div>
+          <Heading />
           <div className="user-account" data-auth-visibility="true">
             <img
               src="img/profile.png"

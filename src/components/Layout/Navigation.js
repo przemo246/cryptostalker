@@ -3,12 +3,13 @@ import rocketIcon from '../../img/rocket.svg';
 import pieChartIcon from '../../img/pie-chart.svg';
 import githubIcon from '../../img/github.svg';
 import linkedinIcon from '../../img/linkedin.svg';
+import logo from '../../img/logo.svg';
 
 export const Navigation = () => {
   return (
     <nav className="navigation">
       <div className="navigation__top">
-        <img src="img/logo.svg" alt="" className="navigation__logo" />
+        <img src={logo} alt="" className="navigation__logo" />
         <ul className="navigation__list">
           <li className="navigation__item">
             <a href="#" className="navigation__link" data-navigation-home>
