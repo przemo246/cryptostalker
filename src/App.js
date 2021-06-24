@@ -48,10 +48,10 @@ function App() {
               <Route exact path="/">
                 <p>Home</p>
               </Route>
-              <Route path="top-crypto">
+              <Route path="/top-crypto">
                 <p>Top crypto</p>
               </Route>
-              <Route path="portfolio">
+              <Route path="/portfolio">
                 <p>Portfolio</p>
               </Route>
             </Switch>
