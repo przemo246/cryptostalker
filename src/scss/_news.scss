@@ -1,0 +1,52 @@
+.articles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  &__heading {
+    border-bottom: 1px solid $color-grey-light-2;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    grid-column: 1 / -1;
+  }
+  &__list {
+    margin-left: 3rem;
+  }
+}
+
+.article {
+  padding: 1rem 0;
+  font-weight: 400;
+  font-size: 1.3rem;
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  &__name {
+    font-weight: inherit;
+    font-size: inherit;
+  }
+  &__description {
+    padding: 1rem 0 0.3rem;
+    color: $color-grey-dark-1;
+    font-weight: inherit;
+  }
+  &__link {
+    color: $color-primary;
+    text-decoration: none;
+  }
+
+  &__link span {
+    transition: all 0.2s;
+  }
+
+  &__link:hover span {
+    margin-left: 0.3rem;
+  }
+  &__img {
+    &--big {
+      width: 20rem;
+    }
+    &--small {
+      width: 10rem;
+    }
+  }
+}
