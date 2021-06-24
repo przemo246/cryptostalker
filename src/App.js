@@ -5,7 +5,8 @@ import { Container } from './components/Layout/Container';
 import { Content } from './components/Layout/Content';
 import { Main } from './components/Layout/Main';
 import { Header } from './components/Layout/Header';
-import { UserAccount } from './components/Layout/UserAccount';
+import { LoggedUser } from './components/Layout/LoggedUser';
+import { NotLoggedUser } from './components/Layout/NotLoggedUser';
 import { UserLoginDetails } from './hooks/UserLoginDetails';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import homeIcon from './img/home.svg';
@@ -41,7 +42,7 @@ function App() {
         <Main>
           <Header>
             <Heading />
-            <UserAccount />
+            {user ? <LoggedUser /> : <NotLoggedUser />}
           </Header>
           <Content>
             <Switch>
@@ -49,10 +50,10 @@ function App() {
                 <p>Home</p>
               </Route>
               <Route path="/top-crypto">
-                <p>Top crypto</p>
+                {user ? <p>Top crypto</p> : <p>Please log in</p>}
               </Route>
               <Route path="/portfolio">
-                <p>Portfolio</p>
+                {user ? <p>Portfolio</p> : <p>Please log in</p>}
               </Route>
             </Switch>
           </Content>

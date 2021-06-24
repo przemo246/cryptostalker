@@ -117,6 +117,10 @@
   }
 }
 
+.not-logged button:nth-child(1) {
+  margin-right: 0.5rem;
+}
+
 .main {
   background-color: $color-grey-light-1;
   display: grid;
