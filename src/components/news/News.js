@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArticleBig } from './ArticleBig';
+import { ArticleSmall } from './ArticleSmall';
 
 const getTodayAndYesterdayDate = () => {
   const currentDate = new Date();
@@ -38,13 +39,20 @@ export const News = () => {
       <div className="articles__top">
         <h3 className="heading-tertiary">TOP READS</h3>
         {news.map((data, i) => {
-          if (i < 3) {
+          if (i < 2) {
             return <ArticleBig key={i} data={data} />;
           }
+          return null;
         })}
       </div>
       <div className="articles__list">
         <h3 className="heading-tertiary">LATEST</h3>
+        {news.map((data, i) => {
+          if (i > 1) {
+            return <ArticleSmall key={i} data={data} />;
+          }
+          return null;
+        })}
       </div>
     </div>
   );
