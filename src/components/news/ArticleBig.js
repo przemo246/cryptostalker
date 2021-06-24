@@ -1,3 +1,5 @@
+import noPicture from '../../img/no_picture.jpg';
+
 export const ArticleBig = (props) => {
   const {
     data: {
@@ -11,7 +13,7 @@ export const ArticleBig = (props) => {
   return (
     <article className="article">
       <img
-        src={urlToImage}
+        src={urlToImage || noPicture}
         className="article__img article__img--big"
         alt={title}
       />
