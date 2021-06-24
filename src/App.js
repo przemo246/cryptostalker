@@ -1,13 +1,14 @@
 import './App.scss';
-import { Navigation } from './components/Layout/Navigation';
-import { Heading } from './components/Layout/Heading';
-import { Container } from './components/Layout/Container';
-import { Content } from './components/Layout/Content';
-import { Main } from './components/Layout/Main';
-import { Header } from './components/Layout/Header';
-import { LoggedUser } from './components/Layout/LoggedUser';
-import { NotLoggedUser } from './components/Layout/NotLoggedUser';
+import { Navigation } from './components/layout/Navigation';
+import { Heading } from './components/layout/Heading';
+import { Container } from './components/layout/Container';
+import { Content } from './components/layout/Content';
+import { Main } from './components/layout/Main';
+import { Header } from './components/layout/Header';
+import { LoggedUser } from './components/layout/LoggedUser';
+import { NotLoggedUser } from './components/layout/NotLoggedUser';
 import { UserLoginDetails } from './hooks/UserLoginDetails';
+import { News } from './components/news/News';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import homeIcon from './img/home.svg';
 import rocketIcon from './img/rocket.svg';
@@ -47,7 +48,7 @@ function App() {
           <Content>
             <Switch>
               <Route exact path="/">
-                <p>Home</p>
+                <News />
               </Route>
               <Route path="/top-crypto">
                 {user ? <p>Top crypto</p> : <p>Please log in</p>}

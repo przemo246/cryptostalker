@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ArticleBig } from './ArticleBig';
 
 const getTodayAndYesterdayDate = () => {
   const currentDate = new Date();
@@ -22,9 +23,27 @@ export const News = () => {
         `https://newsapi.org/v2/everything?q=cryptocurrency&from=${yesterday}&to=${today}&sortBy=popularity&apiKey=715d79a01d574143b994a0dbd3346b9d`
       );
       const JSON = await response.json();
-      console.log(JSON);
+      const articles = JSON.articles.slice(0, 6);
+      setNews(articles);
     };
     getNews();
   }, []);
-  return <div>News</div>;
+  return (
+    <div className="articles">
+      <div className="articles__heading">
+        <h2 className="heading-secondary">
+          What's currently moving the prices? 📰
+        </h2>
+      </div>
+      <div className="articles__top">
+        <h3 className="heading-tertiary">TOP READS</h3>
+        {news.map((data, i) => (
+          <ArticleBig key={i} data={data} />
+        ))}
+      </div>
+      <div className="articles__list">
+        <h3 className="heading-tertiary">LATEST</h3>
+      </div>
+    </div>
+  );
 };
