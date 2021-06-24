@@ -37,9 +37,11 @@ export const News = () => {
       </div>
       <div className="articles__top">
         <h3 className="heading-tertiary">TOP READS</h3>
-        {news.map((data, i) => (
-          <ArticleBig key={i} data={data} />
-        ))}
+        {news.map((data, i) => {
+          if (i < 3) {
+            return <ArticleBig key={i} data={data} />;
+          }
+        })}
       </div>
       <div className="articles__list">
         <h3 className="heading-tertiary">LATEST</h3>
