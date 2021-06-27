@@ -12,6 +12,7 @@ import { LoggedUser } from './components/layout/LoggedUser';
 import { NotLoggedUser } from './components/layout/NotLoggedUser';
 import { UserLoginDetails } from './hooks/UserLoginDetails';
 import { News } from './components/news/News';
+import { TopCrypto } from './components/top-crypto/TopCrypto';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
@@ -51,7 +52,7 @@ function App() {
                 <News />
               </Route>
               <Route path="/top-crypto">
-                {user ? <p>Top crypto</p> : <p>Please log in</p>}
+              <TopCrypto/>
               </Route>
               <Route path="/portfolio">
                 {user ? <p>Portfolio</p> : <p>Please log in</p>}
