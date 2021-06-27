@@ -12,7 +12,7 @@ export const TopCrypto = () => {
         getTopCrypto();
     },[]);
     return (
-        <>
+        <div className="top-crypto">
         <div className="top-crypto__heading">
   <h2 className="heading-secondary">
     Top cryptocurrencies (by market cap.) 🥇
@@ -30,6 +30,6 @@ export const TopCrypto = () => {
     {topCrypto.map((data, i) => <TopCryptoItem key={i} index={i} data={data}/>)}
     </ul>
     </div>
-    </>
+    </div>
     )
 };

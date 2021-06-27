@@ -1,0 +1,32 @@
+.top-crypto {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  width: 100%;
+  &__heading {
+    border-bottom: 1px solid $color-grey-light-2;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+  }
+  &__headings,
+  &__item {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 1.4rem;
+    grid-template-columns: repeat(6, 1fr);
+    border-bottom: 1px solid $color-grey-light-2;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    & div:nth-child(2) {
+      @include flex-center;
+      & img {
+        width: 2rem;
+        margin-right: 0.6rem;
+      }
+    }
+  }
+  &__list {
+    list-style: none;
+  }
+}

@@ -1,5 +1,5 @@
 export const TopCryptoItem = (props) => {
-    const {data: { name, image, symbol, current_price, market_cap, price_change_percentage_24h }, index: {i}} = props;
+    const {data: { name, image, symbol, current_price, market_cap, price_change_percentage_24h }} = props;
     const marketCap = (market_cap / 1000000000).toFixed(0);
     const priceChange = price_change_percentage_24h.toFixed(2);
     return (
