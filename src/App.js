@@ -52,7 +52,7 @@ function App() {
                 <News />
               </Route>
               <Route path="/top-crypto">
-              <TopCrypto/>
+                <TopCrypto />
               </Route>
               <Route path="/portfolio">
                 {user ? <p>Portfolio</p> : <p>Please log in</p>}
