@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
-import { firebaseApp } from '../firebase.config';
+import { auth } from '../firebase.config';
 
 export const UserLoginDetails = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged(setToken);
+    return auth.onAuthStateChanged(setToken);
   }, []);
 
   useEffect(() => {
