@@ -2,12 +2,17 @@ import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 import reactDom from 'react-dom';
 
-const Modal = (props) => {
-  if (!props.open) return null;
+const Modal = ({ open, type, onClose }) => {
+  console.log(open, type, onClose);
+  if (!open) return null;
   return reactDom.createPortal(
     <>
       <div className="overlay"></div>
-      {props.type === 'login' ? <LoginModal /> : <RegisterModal />}
+      {type === 'login' ? (
+        <LoginModal onClose={onClose} />
+      ) : (
+        <RegisterModal onClose={onClose} />
+      )}
     </>,
     document.getElementById('modal-root')
   );
