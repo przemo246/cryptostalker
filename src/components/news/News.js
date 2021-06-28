@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArticleBig } from './ArticleBig';
 import { ArticleSmall } from './ArticleSmall';
+import Loader from 'react-loader-spinner';
 
 const getTodayAndYesterdayDate = () => {
   const currentDate = new Date();
@@ -17,6 +18,7 @@ const getTodayAndYesterdayDate = () => {
 
 export const News = () => {
   const [news, setNews] = useState([]);
+  const [loader, setLoader] = useState(true);
   useEffect(() => {
     const getNews = async () => {
       const [yesterday, today] = getTodayAndYesterdayDate();
@@ -25,35 +27,48 @@ export const News = () => {
       );
       const JSON = await response.json();
       const articles = JSON.articles.slice(0, 6);
+      setLoader(false);
       setNews(articles);
     };
     getNews();
   }, []);
   return (
-    <div className="articles">
-      <div className="articles__heading">
-        <h2 className="heading-secondary">
-          What's currently moving the prices? 📰
-        </h2>
-      </div>
-      <div className="articles__top">
-        <h3 className="heading-tertiary">TOP READS</h3>
-        {news.map((data, i) => {
-          if (i < 2) {
-            return <ArticleBig key={i} data={data} />;
-          }
-          return null;
-        })}
-      </div>
-      <div className="articles__list">
-        <h3 className="heading-tertiary">LATEST</h3>
-        {news.map((data, i) => {
-          if (i > 1) {
-            return <ArticleSmall key={i} data={data} />;
-          }
-          return null;
-        })}
-      </div>
-    </div>
+    <>
+      {loader ? (
+        <Loader
+          type="TailSpin"
+          color="#333"
+          height={70}
+          width={70}
+          visible={loader}
+        />
+      ) : (
+        <div className="articles">
+          <div className="articles__heading">
+            <h2 className="heading-secondary">
+              What's currently moving the prices? 📰
+            </h2>
+          </div>
+          <div className="articles__top">
+            <h3 className="heading-tertiary">TOP READS</h3>
+            {news.map((data, i) => {
+              if (i < 2) {
+                return <ArticleBig key={i} data={data} />;
+              }
+              return null;
+            })}
+          </div>
+          <div className="articles__list">
+            <h3 className="heading-tertiary">LATEST</h3>
+            {news.map((data, i) => {
+              if (i > 1) {
+                return <ArticleSmall key={i} data={data} />;
+              }
+              return null;
+            })}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
