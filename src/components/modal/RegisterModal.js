@@ -1,21 +1,34 @@
 import { useState } from "react";
+import { auth } from "../../firebase.config";
 
 const RegisterModal = ({ onClose }) => {
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
+    error: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
+  const registerUser = ({ username, email, password }) => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((token) => {
+        token.user.updateProfile({
+          displayName: username,
+        });
+      })
+      .catch((err) => setValues({ ...values, error: err.message }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { username, email, password } = values;
     if (username && email && password) {
-      console.log(values);
+      registerUser(values);
       setValues({ username: "", email: "", password: "" });
     }
   };
@@ -50,7 +63,7 @@ const RegisterModal = ({ onClose }) => {
               onChange={handleChange}
               required
             />
-            <label htmlFor="username">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               className="modal__input"
               type="password"
@@ -74,7 +87,7 @@ const RegisterModal = ({ onClose }) => {
             >
               OK
             </button>
-            <div className="notification"></div>
+            <div className="notification">{values.error}</div>
           </form>
         </div>
       </div>
