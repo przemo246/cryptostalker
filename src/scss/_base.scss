@@ -1,3 +1,5 @@
+@import "./mixins.scss";
+
 $color-primary: #00c590;
 $color-primary-dark: #00ac7e;
 $color-secondary: #333;
@@ -33,11 +35,10 @@ body {
   line-height: 1.6;
   font-size: 1.6rem;
   font-weight: 300;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: $color-secondary;
   min-height: 100vh;
   background-color: $color-primary;
-  display: grid;
-  place-items: center;
   position: relative;
+  @include flex-center;
 }
