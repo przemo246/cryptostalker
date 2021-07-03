@@ -15,7 +15,23 @@ const RegisterModal = ({ onClose }) => {
   };
 
   const handleFileChange = (e) => {
-    setValues({ ...values, avatar: e.target.files[0] });
+    const avatar = e.target.files[0];
+    if (avatar) {
+      if (
+        (avatar.type.includes("jpg") ||
+          avatar.type.includes("png") ||
+          avatar.type.includes("jpeg")) &&
+        avatar.size < 200001
+      ) {
+        setValues({ ...values, avatar, error: "" });
+      } else {
+        setValues({
+          ...values,
+          error:
+            "Accepted file extensions: .jpg, .jpeg, .png and size of maximum 200kB",
+        });
+      }
+    }
   };
 
   const addPictureToStorage = (id, avatar) => {
