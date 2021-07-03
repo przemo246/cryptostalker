@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { auth } from "../../firebase.config";
+import { auth, storage } from "../../firebase.config";
 
 const RegisterModal = ({ onClose }) => {
   const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
+    avatar: null,
     error: "",
   });
   const handleChange = (e) => {
@@ -13,13 +14,25 @@ const RegisterModal = ({ onClose }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const registerUser = ({ username, email, password }) => {
+  const handleFileChange = (e) => {
+    setValues({ ...values, avatar: e.target.files[0] });
+  };
+
+  const addPictureToStorage = (id, avatar) => {
+    return storage.ref(`users/${id}/profile.jpg`).put(avatar);
+  };
+
+  const registerUser = ({ username, email, password, avatar }) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((token) => {
         token.user.updateProfile({
           displayName: username,
         });
+        if (avatar) {
+          addPictureToStorage(token.user.uid, avatar);
+        }
+        auth.signOut();
       })
       .catch((err) => setValues({ ...values, error: err.message }));
   };
@@ -29,7 +42,13 @@ const RegisterModal = ({ onClose }) => {
     const { username, email, password } = values;
     if (username && email && password) {
       registerUser(values);
-      setValues({ username: "", email: "", password: "" });
+      setValues({
+        username: "",
+        email: "",
+        password: "",
+        avatar: null,
+        error: "",
+      });
     }
   };
   return (
@@ -76,9 +95,10 @@ const RegisterModal = ({ onClose }) => {
             <label htmlFor="avatar">Avatar (optional)</label>
             <input
               type="file"
-              id="myFile"
+              id="avatar"
               className="modal__input"
-              name="filename"
+              name="avatar"
+              onChange={handleFileChange}
             />
             <button
               className="btn btn-green"
