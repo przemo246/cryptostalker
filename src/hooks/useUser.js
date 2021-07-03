@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { auth, db } from "../firebase.config";
+import { auth } from "../firebase.config";
 
 export const useUser = () => {
   const [user, setUser] = useState(null);
@@ -14,12 +14,7 @@ export const useUser = () => {
       setUser(null);
       return;
     }
-    return db
-      .collection("users")
-      .doc(token.uid)
-      .onSnapshot((doc) => {
-        setUser({ uid: token.uid, ...doc.data() });
-      });
+    setUser(auth.currentUser);
   }, [token]);
 
   return user;

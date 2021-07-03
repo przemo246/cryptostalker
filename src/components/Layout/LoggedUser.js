@@ -1,16 +1,24 @@
 import logOutIcon from "../../img/switch.svg";
-import { auth } from "../../firebase.config";
+import { auth, storage } from "../../firebase.config";
 import { useUser } from "../../hooks/useUser";
+import { useState, useEffect } from "react";
 
 export const LoggedUser = () => {
+  const [avatar, setAvatar] = useState(null);
   const user = useUser();
-  console.log(user);
+  useEffect(() => {
+    storage
+      .ref(`users/${user?.uid}/profile.jpg`)
+      .getDownloadURL()
+      .then((avatarUrl) => setAvatar(avatarUrl))
+      .catch((error) => console.error(error.message));
+  }, [user?.uid]);
   return (
     <div className="user-account">
-      <img src="img/profile.png" alt="" className="user-account__profile-pic" />
+      <img src={avatar} alt="" className="user-account__profile-pic" />
       <div className="user-account__details">
-        <span className="user-account__name">Anonymous</span>
-        <span className="user-account__email">anonymous@gmail.com</span>
+        <span className="user-account__name">{user?.displayName}</span>
+        <span className="user-account__email">{user?.email}</span>
       </div>
       <button title="Log out" onClick={() => auth.signOut()}>
         <img src={logOutIcon} alt="" className="user-account__icon" />
