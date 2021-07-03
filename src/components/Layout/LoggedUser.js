@@ -1,7 +1,10 @@
 import logOutIcon from "../../img/switch.svg";
 import { auth } from "../../firebase.config";
+import { useUser } from "../../hooks/useUser";
 
 export const LoggedUser = () => {
+  const user = useUser();
+  console.log(user);
   return (
     <div className="user-account">
       <img src="img/profile.png" alt="" className="user-account__profile-pic" />
