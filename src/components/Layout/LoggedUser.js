@@ -5,8 +5,8 @@ import { useUser } from "../../hooks/useUser";
 import { useState, useEffect } from "react";
 
 export const LoggedUser = () => {
-  const [avatar, setAvatar] = useState(null);
   const user = useUser();
+  const [avatar, setAvatar] = useState(null);
   useEffect(() => {
     storage
       .ref(`users/${user?.uid}/profile.jpg`)
