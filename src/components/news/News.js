@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { ArticleBig } from './ArticleBig';
-import { ArticleSmall } from './ArticleSmall';
-import Loader from 'react-loader-spinner';
+import { useState, useEffect } from "react";
+import { ArticleBig } from "./ArticleBig";
+import { ArticleSmall } from "./ArticleSmall";
+import Loader from "react-loader-spinner";
 
 const getTodayAndYesterdayDate = () => {
   const currentDate = new Date();
@@ -23,10 +23,11 @@ export const News = () => {
     const getNews = async () => {
       const [yesterday, today] = getTodayAndYesterdayDate();
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=cryptocurrency&from=${yesterday}&to=${today}&sortBy=popularity&apiKey=715d79a01d574143b994a0dbd3346b9d`
+        `https://newsapi.org/v2/everything?q=crypto&from=${yesterday}&to=${today}&sortBy=popularity&apiKey=715d79a01d574143b994a0dbd3346b9d`
       );
       const JSON = await response.json();
       const articles = JSON.articles.slice(0, 6);
+      console.log(articles);
       setLoader(false);
       setNews(articles);
     };
