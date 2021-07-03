@@ -1,4 +1,5 @@
-import logOutIcon from '../../img/switch.svg';
+import logOutIcon from "../../img/switch.svg";
+import { auth } from "../../firebase.config";
 
 export const LoggedUser = () => {
   return (
@@ -8,7 +9,7 @@ export const LoggedUser = () => {
         <span className="user-account__name">Anonymous</span>
         <span className="user-account__email">anonymous@gmail.com</span>
       </div>
-      <button title="Log out">
+      <button title="Log out" onClick={() => auth.signOut()}>
         <img src={logOutIcon} alt="" className="user-account__icon" />
       </button>
     </div>
