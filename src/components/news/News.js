@@ -27,7 +27,6 @@ export const News = () => {
       );
       const JSON = await response.json();
       const articles = JSON.articles.slice(0, 6);
-      console.log(articles);
       setLoader(false);
       setNews(articles);
     };
