@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import Modal from '../modal/Modal';
+import { useState } from "react";
+import useModal from "../../hooks/useModal";
+import Modal from "../modal/Modal";
 
 export const NotLoggedUser = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleIsOpen] = useModal();
   const [modalType, setModalType] = useState(null);
   return (
     <>
@@ -10,8 +11,8 @@ export const NotLoggedUser = () => {
         <button
           className="btn btn-gray"
           onClick={() => {
-            setIsOpen(true);
-            setModalType('login');
+            toggleIsOpen();
+            setModalType("login");
           }}
         >
           Log in
@@ -19,14 +20,14 @@ export const NotLoggedUser = () => {
         <button
           className="btn btn-green"
           onClick={() => {
-            setIsOpen(true);
-            setModalType('register');
+            toggleIsOpen();
+            setModalType("register");
           }}
         >
           Register
         </button>
       </div>
-      <Modal open={isOpen} type={modalType} onClose={() => setIsOpen(false)} />
+      <Modal open={isOpen} type={modalType} onClose={toggleIsOpen} />
     </>
   );
 };

@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
+import useModal from "../../hooks/useModal";
 
 const Portfolio = () => {
   const [assets, getAssets] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, toggleIsOpen] = useModal();
   return (
     <>
       <div className="portfolio">
@@ -22,7 +23,7 @@ const Portfolio = () => {
           </div>
         </div>
         <div className="add-new">
-          <button className="add-new__btn" onClick={() => setIsOpen(true)}>
+          <button className="add-new__btn" onClick={toggleIsOpen}>
             + Add new
           </button>
         </div>
@@ -38,7 +39,7 @@ const Portfolio = () => {
           </div>
         </div>
       </div>
-      <Modal open={isOpen} type="add-asset" onClose={() => setIsOpen(false)} />
+      <Modal open={isOpen} type="add-asset" onClose={toggleIsOpen} />
     </>
   );
 };
