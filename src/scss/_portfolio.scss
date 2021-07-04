@@ -1,0 +1,76 @@
+.portfolio {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: repeat(3, auto) 1fr;
+  gap: 3rem;
+  &__heading {
+    border-bottom: 1px solid $color-grey-light-2;
+    padding-bottom: 1rem;
+  }
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(max-content, 25rem));
+  justify-content: center;
+  gap: 2rem;
+  font-size: 1.4rem;
+  &__balance,
+  &__price,
+  &__profit {
+    @include flex-center;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    border-radius: 15px;
+    color: #fff;
+    & span {
+      font-weight: 600;
+      font-size: 2.8rem;
+    }
+  }
+  &__balance {
+    background-image: $green-linear-gradient;
+  }
+  &__price {
+    background-image: $yellow-linear-gradient;
+  }
+  &__profit {
+    background-image: $blue-linear-gradient;
+  }
+}
+
+.add-new {
+  @include flex-center;
+  &__btn {
+    background-image: $black-linear-gradient;
+    padding: 1rem 2rem;
+    font-size: 1.4rem;
+    border-radius: 15px;
+    color: #fff;
+  }
+}
+
+.assets {
+  &__headings,
+  &__item {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    font-size: 1.4rem;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid $color-grey-light-2;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    & div:nth-child(2) {
+      @include flex-center;
+      & img {
+        width: 2rem;
+        margin-right: 0.6rem;
+      }
+    }
+  }
+  &__list {
+    list-style: none;
+  }
+}
