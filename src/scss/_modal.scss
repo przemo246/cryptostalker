@@ -9,6 +9,10 @@
   z-index: 9998;
 }
 
+input {
+  all: unset;
+}
+
 .modal {
   grid-template-rows: auto 1fr;
   position: fixed;
@@ -72,4 +76,25 @@
       border: 1px solid $color-grey-dark-1;
     }
   }
+}
+
+.suggestions {
+  position: absolute;
+  width: 21.15rem;
+  top: 45.4%;
+  background-color: $color-grey-light-1;
+  list-style: none;
+  &__item {
+    border: 1px solid $color-grey-light-2;
+    padding: 1rem;
+    cursor: pointer;
+    &:hover {
+      background-color: $color-grey-light-2;
+    }
+  }
+}
+
+.notification {
+  margin-top: 2rem;
+  font-size: 1.4rem;
 }
