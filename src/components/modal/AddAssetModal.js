@@ -1,4 +1,38 @@
+import { useState } from "react";
+
 const AddAssetModal = ({ onClose }) => {
+  const [values, setValues] = useState({
+    assetName: "",
+    assetPrice: "",
+    assetQuantity: "",
+    error: "",
+  });
+  const [suggestions, setSuggestions] = useState([]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setValues({ ...values, [name]: value });
+    if (name === "assetName") {
+      handleSuggestions(value);
+    }
+  };
+
+  const handleSuggestions = (value) => {
+    fetch("https://api.coingecko.com/api/v3/coins/")
+      .then((data) => data.json())
+      .then((res) => {
+        const matches = res.filter((el) => {
+          const regex = new RegExp(`^${value}`, "gi");
+          return el.name.match(regex) || el.symbol.match(regex);
+        });
+        setSuggestions(matches);
+        if (value.length === 0) {
+          setSuggestions([]);
+        }
+      })
+      .catch((err) => console.error(err.message));
+  };
   return (
     <div className="modal">
       <div className="modal__close">
@@ -16,19 +50,27 @@ const AddAssetModal = ({ onClose }) => {
             <input
               className="modal__input"
               type="text"
-              name="asset-name"
-              id="asset-name"
+              name="assetName"
               placeholder="eg. Bitcoin"
+              onChange={handleChange}
+              value={values.assetName}
               required
             />
-            <ul className="suggestions"></ul>
+            <ul className="suggestions">
+              {suggestions.map((el, i) => {
+                return (
+                  <li className="suggestions__item" key={i} id={el.id}>
+                    {el.name} ({el.symbol.toUpperCase()})
+                  </li>
+                );
+              })}
+            </ul>
           </div>
           <label htmlFor="asset-price">Price (in USD)</label>
           <input
             className="modal__input"
             type="number"
-            name="asset-price"
-            id="asset-price"
+            name="assetPrice"
             min="0"
             step="any"
             placeholder="eg. 30000"
@@ -38,8 +80,7 @@ const AddAssetModal = ({ onClose }) => {
           <input
             className="modal__input"
             type="number"
-            name="asset-quantity"
-            id="asset-quantity"
+            name="assetQuantity"
             min="0"
             step="any"
             placeholder="eg. 5"
