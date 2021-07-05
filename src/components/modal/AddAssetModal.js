@@ -33,6 +33,10 @@ const AddAssetModal = ({ onClose }) => {
       })
       .catch((err) => console.error(err.message));
   };
+  const getAssetId = (e) => {
+    setValues({ ...values, assetName: e.target.id });
+    setSuggestions([]);
+  };
   return (
     <div className="modal">
       <div className="modal__close">
@@ -59,7 +63,12 @@ const AddAssetModal = ({ onClose }) => {
             <ul className="suggestions">
               {suggestions.map((el, i) => {
                 return (
-                  <li className="suggestions__item" key={i} id={el.id}>
+                  <li
+                    className="suggestions__item"
+                    key={i}
+                    id={el.id}
+                    onClick={getAssetId}
+                  >
                     {el.name} ({el.symbol.toUpperCase()})
                   </li>
                 );
