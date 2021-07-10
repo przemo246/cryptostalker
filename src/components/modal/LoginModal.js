@@ -38,7 +38,7 @@ const LoginModal = ({ onClose }) => {
       <div className="modal__content">
         <div className="modal__heading">Log in</div>
         <div className="modal__content">
-          <form className="popup__form">
+          <form className="modal__form">
             <label htmlFor="email">E-mail</label>
             <input
               className="modal__input"

@@ -77,7 +77,7 @@ const RegisterModal = ({ onClose }) => {
       <div className="modal__content">
         <div className="modal__heading">Register</div>
         <div className="modal__content">
-          <form className="popup__form">
+          <form className="modal__form">
             <label htmlFor="username">Username</label>
             <input
               type="text"
