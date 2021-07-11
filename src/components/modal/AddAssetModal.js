@@ -13,7 +13,7 @@ export const AddAssetModal = ({ onClose }) => {
   const [suggestions, setSuggestions] = useState([]);
 
   const handleChange = (e) => {
-    let { name, value } = e.target;
+    const { name, value } = e.target;
     setValues({ ...values, [name]: value });
     if (name === "id") {
       handleSuggestions(value);
@@ -23,10 +23,14 @@ export const AddAssetModal = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { id, price, holdings } = values;
-    if (id && price && holdings && price > 0 && holdings > 0) {
-      console.log(id, +price, +holdings);
-      // addAssetToDb(id, +price, +holdings);
-      setValues([{ id: "", price: "", holdings: "", notification: "" }]);
+    if (id && price && holdings) {
+      addAssetToDb(id, +price, +holdings);
+      setValues({ id: "", price: "", holdings: "", notification: "" });
+    } else {
+      setValues({
+        ...values,
+        notification: "Uzupełnij wszystkie pola formularza!",
+      });
     }
   };
 
@@ -50,7 +54,7 @@ export const AddAssetModal = ({ onClose }) => {
     setSuggestions([]);
   };
 
-  const addAssetToDb = ({ id, price, holdings }) => {
+  const addAssetToDb = (id, price, holdings) => {
     return db
       .collection("assets")
       .doc(user?.uid)
@@ -132,6 +136,7 @@ export const AddAssetModal = ({ onClose }) => {
           >
             Add
           </button>
+          <div className="notification">{values.notification}</div>
         </form>
       </div>
     </div>
