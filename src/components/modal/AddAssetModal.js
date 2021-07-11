@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { db } from "../../firebase.config";
+import { useUser } from "../../hooks/useUser";
 
 const AddAssetModal = ({ onClose }) => {
+  const user = useUser();
   const [values, setValues] = useState({
     assetName: "",
     assetPrice: "",
@@ -11,10 +14,17 @@ const AddAssetModal = ({ onClose }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setValues({ ...values, [name]: value });
     if (name === "assetName") {
       handleSuggestions(value);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { assetName, assetPrice, assetQuantity } = values;
+    if (assetName && assetPrice && assetQuantity) {
+      addAssetToDb(assetName, assetPrice, assetQuantity);
     }
   };
 
@@ -37,6 +47,15 @@ const AddAssetModal = ({ onClose }) => {
     setValues({ ...values, assetName: e.target.id });
     setSuggestions([]);
   };
+
+  const addAssetToDb = ({ assetName, assetPrice, assetQuantity }) => {
+    return db.collection("assets").doc(user?.uid).collection("allassets").add({
+      assetName,
+      assetPrice,
+      assetQuantity,
+    });
+  };
+
   return (
     <div className="modal">
       <div className="modal__close">
@@ -95,7 +114,11 @@ const AddAssetModal = ({ onClose }) => {
             placeholder="eg. 5"
             required
           />
-          <button className="btn btn-green" type="submit">
+          <button
+            className="btn btn-green"
+            onClick={handleSubmit}
+            type="submit"
+          >
             Add
           </button>
         </form>
