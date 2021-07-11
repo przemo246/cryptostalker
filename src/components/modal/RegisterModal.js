@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { auth, storage } from "../../firebase.config";
 
-const RegisterModal = ({ onClose }) => {
+export const RegisterModal = ({ onClose }) => {
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -130,5 +130,3 @@ const RegisterModal = ({ onClose }) => {
     </div>
   );
 };
-
-export default RegisterModal;

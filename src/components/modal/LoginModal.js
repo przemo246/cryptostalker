@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { auth } from "../../firebase.config";
 
-const LoginModal = ({ onClose }) => {
+export const LoginModal = ({ onClose }) => {
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -71,5 +71,3 @@ const LoginModal = ({ onClose }) => {
     </div>
   );
 };
-
-export default LoginModal;

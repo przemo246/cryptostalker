@@ -2,29 +2,31 @@ import { useState } from "react";
 import { db } from "../../firebase.config";
 import { useUser } from "../../hooks/useUser";
 
-const AddAssetModal = ({ onClose }) => {
+export const AddAssetModal = ({ onClose }) => {
   const user = useUser();
   const [values, setValues] = useState({
-    assetName: "",
-    assetPrice: "",
-    assetQuantity: "",
-    error: "",
+    id: "",
+    price: "",
+    holdings: "",
+    notification: "",
   });
   const [suggestions, setSuggestions] = useState([]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
     setValues({ ...values, [name]: value });
-    if (name === "assetName") {
+    if (name === "id") {
       handleSuggestions(value);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { assetName, assetPrice, assetQuantity } = values;
-    if (assetName && assetPrice && assetQuantity) {
-      addAssetToDb(assetName, assetPrice, assetQuantity);
+    const { id, price, holdings } = values;
+    if (id && price && holdings && price > 0 && holdings > 0) {
+      console.log(id, +price, +holdings);
+      // addAssetToDb(id, +price, +holdings);
+      setValues([{ id: "", price: "", holdings: "", notification: "" }]);
     }
   };
 
@@ -44,16 +46,21 @@ const AddAssetModal = ({ onClose }) => {
       .catch((err) => console.error(err.message));
   };
   const getAssetId = (e) => {
-    setValues({ ...values, assetName: e.target.id });
+    setValues({ ...values, id: e.target.id });
     setSuggestions([]);
   };
 
-  const addAssetToDb = ({ assetName, assetPrice, assetQuantity }) => {
-    return db.collection("assets").doc(user?.uid).collection("allassets").add({
-      assetName,
-      assetPrice,
-      assetQuantity,
-    });
+  const addAssetToDb = ({ id, price, holdings }) => {
+    return db
+      .collection("assets")
+      .doc(user?.uid)
+      .collection("allassets")
+      .add({
+        timeStamp: parseInt((Date.now() + "").slice(-5)),
+        id,
+        price,
+        holdings,
+      });
   };
 
   return (
@@ -73,10 +80,10 @@ const AddAssetModal = ({ onClose }) => {
             <input
               className="modal__input"
               type="text"
-              name="assetName"
+              name="id"
               placeholder="eg. Bitcoin"
               onChange={handleChange}
-              value={values.assetName}
+              value={values.id}
               required
             />
             <ul className="suggestions">
@@ -98,20 +105,24 @@ const AddAssetModal = ({ onClose }) => {
           <input
             className="modal__input"
             type="number"
-            name="assetPrice"
+            name="price"
             min="0"
             step="any"
             placeholder="eg. 30000"
+            value={values.price}
+            onChange={handleChange}
             required
           />
-          <label htmlFor="asset-quantity">Quantity</label>
+          <label htmlFor="asset-holdings">Holdings</label>
           <input
             className="modal__input"
             type="number"
-            name="assetQuantity"
+            name="holdings"
             min="0"
             step="any"
             placeholder="eg. 5"
+            value={values.holdings}
+            onChange={handleChange}
             required
           />
           <button
@@ -126,5 +137,3 @@ const AddAssetModal = ({ onClose }) => {
     </div>
   );
 };
-
-export default AddAssetModal;

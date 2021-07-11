@@ -1,6 +1,6 @@
-import LoginModal from "./LoginModal";
-import RegisterModal from "./RegisterModal";
-import AddAssetModal from "./AddAssetModal";
+import { LoginModal } from "./LoginModal";
+import { RegisterModal } from "./RegisterModal";
+import { AddAssetModal } from "./AddAssetModal";
 import reactDom from "react-dom";
 
 const Modal = ({ open, type, onClose }) => {
