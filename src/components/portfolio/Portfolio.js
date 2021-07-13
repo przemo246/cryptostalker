@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
-import Modal from "../modal/Modal";
-import useModal from "../../hooks/useModal";
+import { useModal } from "../../hooks/useModal";
+import { ModalController } from "../modal/ModalController";
 
 const Portfolio = () => {
   const [assets, getAssets] = useState([]);
+  const [balance, setBalance] = useState(0);
+  const [change, setChange] = useState(0);
+  const [profit, setProfit] = useState(0);
   const [isOpen, toggleIsOpen] = useModal();
   return (
     <>
@@ -13,13 +16,13 @@ const Portfolio = () => {
         </div>
         <div className="features">
           <div className="features__balance">
-            <span id="balance">$ 2361,49</span>Total balance
+            <span id="balance">$ {balance}</span>Total balance
           </div>
           <div className="features__price">
-            <span id="price">$ -63,39</span>24h portfolio change
+            <span id="price">$ {change}</span>24h portfolio change
           </div>
           <div className="features__profit">
-            <span id="profit">$ 408,48</span>Total profit / loss
+            <span id="profit">$ {profit}</span>Total profit / loss
           </div>
         </div>
         <div className="add-new">
@@ -39,7 +42,7 @@ const Portfolio = () => {
           </div>
         </div>
       </div>
-      <Modal open={isOpen} type="add-asset" onClose={toggleIsOpen} />
+      <ModalController open={isOpen} type="add-asset" onClose={toggleIsOpen} />
     </>
   );
 };
