@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { auth, storage } from "../../firebase.config";
 
-export const RegisterModal = ({ onClose }) => {
+export const RegisterModal = () => {
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -68,65 +68,52 @@ export const RegisterModal = ({ onClose }) => {
     }
   };
   return (
-    <div className="modal">
-      <div className="modal__close">
-        <button onClick={onClose} title="Close">
-          &times;
+    <>
+      <div className="modal__heading">Register</div>
+      <form className="modal__form">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          className="modal__input"
+          value={values.username}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="email">E-mail</label>
+        <input
+          className="modal__input"
+          type="email"
+          name="email"
+          id="email"
+          value={values.email}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          className="modal__input"
+          type="password"
+          name="password"
+          id="password"
+          value={values.password}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="avatar">Avatar (optional)</label>
+        <input
+          type="file"
+          id="avatar"
+          className="modal__input"
+          name="avatar"
+          onChange={handleFileChange}
+        />
+        <button className="btn btn-green" type="submit" onClick={handleSubmit}>
+          OK
         </button>
-      </div>
-      <div className="modal__content">
-        <div className="modal__heading">Register</div>
-        <div className="modal__content">
-          <form className="modal__form">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              className="modal__input"
-              value={values.username}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="email">E-mail</label>
-            <input
-              className="modal__input"
-              type="email"
-              name="email"
-              id="email"
-              value={values.email}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="password">Password</label>
-            <input
-              className="modal__input"
-              type="password"
-              name="password"
-              id="password"
-              value={values.password}
-              onChange={handleChange}
-              required
-            />
-            <label htmlFor="avatar">Avatar (optional)</label>
-            <input
-              type="file"
-              id="avatar"
-              className="modal__input"
-              name="avatar"
-              onChange={handleFileChange}
-            />
-            <button
-              className="btn btn-green"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              OK
-            </button>
-            <div className="notification">{values.error}</div>
-          </form>
-        </div>
-      </div>
-    </div>
+        <div className="notification">{values.error}</div>
+      </form>
+    </>
   );
 };

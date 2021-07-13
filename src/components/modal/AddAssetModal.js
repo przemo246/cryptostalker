@@ -2,7 +2,7 @@ import { useState } from "react";
 import { db } from "../../firebase.config";
 import { useUser } from "../../hooks/useUser";
 
-export const AddAssetModal = ({ onClose }) => {
+export const AddAssetModal = () => {
   const user = useUser();
   const [values, setValues] = useState({
     id: "",
@@ -68,77 +68,66 @@ export const AddAssetModal = ({ onClose }) => {
   };
 
   return (
-    <div className="modal">
-      <div className="modal__close">
-        <button title="Close" onClick={onClose}>
-          &times;
-        </button>
+    <>
+      <div className="modal__heading">
+        <span>+</span> Add new asset
       </div>
-      <div className="modal__content">
-        <div className="modal__heading">
-          <span>+</span> Add new asset
+      <form className="modal__form">
+        <label htmlFor="asset">Asset name:</label>
+        <div className="modal__name">
+          <input
+            className="modal__input"
+            type="text"
+            name="id"
+            placeholder="eg. Bitcoin"
+            onChange={handleChange}
+            value={values.id}
+            required
+          />
+          <ul className="suggestions">
+            {suggestions.map((el, i) => {
+              return (
+                <li
+                  className="suggestions__item"
+                  key={i}
+                  id={el.id}
+                  onClick={getAssetId}
+                >
+                  {el.name} ({el.symbol.toUpperCase()})
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <form className="modal__form">
-          <label htmlFor="asset">Asset name:</label>
-          <div className="modal__name">
-            <input
-              className="modal__input"
-              type="text"
-              name="id"
-              placeholder="eg. Bitcoin"
-              onChange={handleChange}
-              value={values.id}
-              required
-            />
-            <ul className="suggestions">
-              {suggestions.map((el, i) => {
-                return (
-                  <li
-                    className="suggestions__item"
-                    key={i}
-                    id={el.id}
-                    onClick={getAssetId}
-                  >
-                    {el.name} ({el.symbol.toUpperCase()})
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <label htmlFor="asset-price">Price (in USD)</label>
-          <input
-            className="modal__input"
-            type="number"
-            name="price"
-            min="0"
-            step="any"
-            placeholder="eg. 30000"
-            value={values.price}
-            onChange={handleChange}
-            required
-          />
-          <label htmlFor="asset-holdings">Holdings</label>
-          <input
-            className="modal__input"
-            type="number"
-            name="holdings"
-            min="0"
-            step="any"
-            placeholder="eg. 5"
-            value={values.holdings}
-            onChange={handleChange}
-            required
-          />
-          <button
-            className="btn btn-green"
-            onClick={handleSubmit}
-            type="submit"
-          >
-            Add
-          </button>
-          <div className="notification">{values.notification}</div>
-        </form>
-      </div>
-    </div>
+        <label htmlFor="asset-price">Price (in USD)</label>
+        <input
+          className="modal__input"
+          type="number"
+          name="price"
+          min="0"
+          step="any"
+          placeholder="eg. 30000"
+          value={values.price}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="asset-holdings">Holdings</label>
+        <input
+          className="modal__input"
+          type="number"
+          name="holdings"
+          min="0"
+          step="any"
+          placeholder="eg. 5"
+          value={values.holdings}
+          onChange={handleChange}
+          required
+        />
+        <button className="btn btn-green" onClick={handleSubmit} type="submit">
+          Add
+        </button>
+        <div className="notification">{values.notification}</div>
+      </form>
+    </>
   );
 };
