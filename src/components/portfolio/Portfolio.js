@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useAssets } from "../../hooks/useAssets";
 import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
 
 const Portfolio = () => {
-  const [assets, getAssets] = useState([]);
+  const assets = useAssets();
   const [balance, setBalance] = useState(0);
   const [change, setChange] = useState(0);
   const [profit, setProfit] = useState(0);
