@@ -13,7 +13,7 @@ import { NotLoggedUser } from "./components/layout/NotLoggedUser";
 import { useUser } from "./hooks/useUser";
 import { News } from "./components/news/News";
 import { TopCrypto } from "./components/top-crypto/TopCrypto";
-import Portfolio from "./components/portfolio/Portfolio";
+import { Portfolio } from "./components/portfolio/Portfolio";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {

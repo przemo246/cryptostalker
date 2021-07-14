@@ -3,12 +3,65 @@ import { useAssets } from "../../hooks/useAssets";
 import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
 
-const Portfolio = () => {
+export const Portfolio = () => {
   const assets = useAssets();
+  const [marketData, setMarketData] = useState([]);
+  const [assetIDs, setAssetIDs] = useState();
   const [balance, setBalance] = useState(0);
   const [change, setChange] = useState(0);
   const [profit, setProfit] = useState(0);
   const [isOpen, toggleIsOpen] = useModal();
+
+  const calculateTotalHoldingsAndTotalValue = (assets) => {
+    return assets.reduce((acc, curr) => {
+      if (acc.findIndex((el) => el.id === curr.id) !== -1) {
+        const index = acc.findIndex((el) => el.id === curr.id);
+        acc[index].totalValue += curr.price * curr.holdings;
+        acc[index].totalHoldings += curr.holdings;
+      } else {
+        const template = {
+          id: curr.id,
+          totalHoldings: curr.holdings,
+          totalValue: curr.price * curr.holdings,
+        };
+        acc.push(template);
+      }
+      return acc;
+    }, []);
+  };
+
+  const formatMarketData = (marketData) => {
+    return marketData.reduce((acc, curr) => {
+      const formattedData = {
+        id: curr.id,
+        symbol: curr.symbol,
+        name: curr.name,
+        img: curr.image.thumb,
+        currentPrice: curr.market_data.current_price.usd,
+        priceChangePerc: curr.market_data.price_change_percentage_24h,
+      };
+      acc.push(formattedData);
+      return acc;
+    }, []);
+  };
+
+  useEffect(() => {
+    return Promise.all(
+      assetIDs.map(async (name) => {
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/coins/${name}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`
+        );
+        const data = await response.json();
+        return data;
+      })
+    )
+      .then((data) => {
+        const formattedData = formatMarketData(data);
+        setMarketData(formattedData);
+        console.log(formattedData);
+      })
+      .catch((err) => console.error(err.message));
+  }, [assetIDs]);
   return (
     <>
       <div className="portfolio">
@@ -47,5 +100,3 @@ const Portfolio = () => {
     </>
   );
 };
-
-export default Portfolio;
