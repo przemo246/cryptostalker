@@ -82,6 +82,23 @@ export const Portfolio = () => {
     const calcTotalAndValue = calculateTotalHoldingsAndTotalValue(assets);
     setCalcAssets(calcTotalAndValue);
   }, [assets]);
+
+  useEffect(() => {
+    const updateSummary = async () => {
+      try {
+        const market = await marketData;
+        const balance = calcAssets.reduce((acc, curr) => {
+          const { currentPrice } = market.find((el) => el.id === curr.id);
+          acc += curr.totalHoldings * currentPrice;
+          return acc;
+        }, 0);
+        console.log(balance);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    updateSummary();
+  }, [calcAssets, marketData]);
   return (
     <>
       <div className="portfolio">
