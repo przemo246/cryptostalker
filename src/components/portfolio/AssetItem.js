@@ -1,9 +1,11 @@
-const numberFormatter = (num) => {
+const formatNumber = (num) => {
+  let formattedNum;
   if (num.toString().startsWith("0.")) {
-    return Number(num);
+    formattedNum = Number(num);
   } else {
-    return Number(num.toFixed(2));
+    formattedNum = Number(num.toFixed(2));
   }
+  return new Intl.NumberFormat("en-US").format(formattedNum);
 };
 
 export const AssetItem = (props) => {
@@ -20,11 +22,11 @@ export const AssetItem = (props) => {
         {name}
       </div>
       <div>{symbol.toUpperCase()}</div>
-      <div>{currentPrice} USD</div>
+      <div>{formatNumber(currentPrice)} USD</div>
       <div>
         {totalHoldings} {symbol.toUpperCase()}
       </div>
-      <div>{numberFormatter(currentPrice * totalHoldings)} USD</div>
+      <div>{formatNumber(currentPrice * totalHoldings)} USD</div>
       <div
         style={
           priceChangePerc >= 0 ? { color: "#00AF54" } : { color: "#EE2E31" }

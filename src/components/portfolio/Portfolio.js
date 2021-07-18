@@ -79,8 +79,8 @@ export const Portfolio = () => {
   useEffect(() => {
     const uniqueAssetNames = removeDuplicates(assets, "id");
     setAssetIDs(uniqueAssetNames);
-    const calcTotalAndValue = calculateTotalHoldingsAndTotalValue(assets);
-    setCalcAssets(calcTotalAndValue);
+    const totalHoldingsAndValue = calculateTotalHoldingsAndTotalValue(assets);
+    setCalcAssets(totalHoldingsAndValue);
   }, [assets]);
 
   useEffect(() => {
