@@ -3,6 +3,7 @@ import { useAssets } from "../../hooks/useAssets";
 import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
 import { AssetItem } from "./AssetItem";
+import Loader from "react-loader-spinner";
 
 const calculateTotalHoldingsAndTotalValue = (assets) => {
   return assets.reduce((acc, curr) => {
@@ -46,10 +47,9 @@ export const Portfolio = () => {
   const [calcAssets, setCalcAssets] = useState([]);
   const [marketData, setMarketData] = useState([]);
   const [assetIDs, setAssetIDs] = useState([]);
-  const [balance, setBalance] = useState(0);
-  const [change, setChange] = useState(0);
-  const [profit, setProfit] = useState(0);
+  const [summary, setSummary] = useState({ balance: 0, change: 0, profit: 0 });
   const [isOpen, toggleIsOpen] = useModal();
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     if (assetIDs.length === 0) {
@@ -57,16 +57,21 @@ export const Portfolio = () => {
     }
     return Promise.all(
       assetIDs.map(async (name) => {
-        const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${name}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`
-        );
-        const data = await response.json();
-        return data;
+        try {
+          const response = await fetch(
+            `https://api.coingecko.com/api/v3/coins/${name}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`
+          );
+          const data = await response.json();
+          return data;
+        } catch (err) {
+          console.error(err);
+        }
       })
     )
       .then((data) => {
         const formattedData = formatMarketData(data);
         setMarketData(formattedData);
+        setLoader(false);
       })
       .catch((err) => console.error(err.message));
   }, [assetIDs]);
@@ -85,13 +90,13 @@ export const Portfolio = () => {
         </div>
         <div className="features">
           <div className="features__balance">
-            <span id="balance">$ {balance}</span>Total balance
+            <span id="balance">$ {summary.balance}</span>Total balance
           </div>
           <div className="features__price">
-            <span id="price">$ {change}</span>24h portfolio change
+            <span id="price">$ {summary.change}</span>24h portfolio change
           </div>
           <div className="features__profit">
-            <span id="profit">$ {profit}</span>Total profit / loss
+            <span id="profit">$ {summary.profit}</span>Total profit / loss
           </div>
         </div>
         <div className="add-new">
@@ -110,18 +115,30 @@ export const Portfolio = () => {
             <h4>24h change</h4>
           </div>
           <ul className="assets__list">
-            {calcAssets.map((el, i) => {
-              const market = marketData.find((data) => data.id === el.id);
-              return (
-                <AssetItem
-                  key={i}
-                  data={market}
-                  totalHoldings={el.totalHoldings}
-                  totalValue={el.totalValue}
-                  index={i}
+            <>
+              {loader ? (
+                <Loader
+                  type="TailSpin"
+                  color="#333"
+                  height={70}
+                  width={70}
+                  visible={loader}
                 />
-              );
-            })}
+              ) : (
+                calcAssets.map((el, i) => {
+                  const market = marketData.find((data) => data.id === el.id);
+                  return (
+                    <AssetItem
+                      key={i}
+                      data={market}
+                      totalHoldings={el.totalHoldings}
+                      totalValue={el.totalValue}
+                      index={i}
+                    />
+                  );
+                })
+              )}
+            </>
           </ul>
         </div>
       </div>
