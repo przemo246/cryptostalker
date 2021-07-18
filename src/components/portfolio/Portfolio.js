@@ -5,14 +5,6 @@ import { ModalController } from "../modal/ModalController";
 import { AssetItem } from "./AssetItem";
 import Loader from "react-loader-spinner";
 
-const numberFormatter = (num) => {
-  if (num.toString().startsWith("0.")) {
-    return Number(num);
-  } else {
-    return Number(num.toFixed(2));
-  }
-};
-
 const calculateTotalHoldingsAndTotalValue = (assets) => {
   return assets.reduce((acc, curr) => {
     if (acc.findIndex((el) => el.id === curr.id) !== -1) {
@@ -23,7 +15,7 @@ const calculateTotalHoldingsAndTotalValue = (assets) => {
       const template = {
         id: curr.id,
         totalHoldings: curr.holdings,
-        totalValue: numberFormatter(curr.price * curr.holdings),
+        totalValue: curr.price * curr.holdings,
       };
       acc.push(template);
     }
@@ -134,14 +126,13 @@ export const Portfolio = () => {
                 />
               ) : (
                 calcAssets.map((el, i) => {
-                  const market = marketData.find((data) => data.id === el.id);
+                  const data = marketData.find((data) => data.id === el.id);
                   return (
                     <AssetItem
                       key={i}
-                      data={market}
-                      totalHoldings={el.totalHoldings}
-                      totalValue={el.totalValue}
                       index={i}
+                      data={data}
+                      totalHoldings={el.totalHoldings}
                     />
                   );
                 })

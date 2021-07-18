@@ -1,9 +1,16 @@
+const numberFormatter = (num) => {
+  if (num.toString().startsWith("0.")) {
+    return Number(num);
+  } else {
+    return Number(num.toFixed(2));
+  }
+};
+
 export const AssetItem = (props) => {
   const {
     data: { id, name, symbol, img, currentPrice, priceChangePerc },
     index,
     totalHoldings,
-    totalValue,
   } = props;
   return (
     <li className="assets__item" id={id}>
@@ -17,7 +24,7 @@ export const AssetItem = (props) => {
       <div>
         {totalHoldings} {symbol.toUpperCase()}
       </div>
-      <div>{currentPrice * totalHoldings} USD</div>
+      <div>{numberFormatter(currentPrice * totalHoldings)} USD</div>
       <div
         style={
           priceChangePerc >= 0 ? { color: "#00AF54" } : { color: "#EE2E31" }
