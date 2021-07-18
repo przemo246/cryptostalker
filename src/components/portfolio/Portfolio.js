@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAssets } from "../../hooks/useAssets";
 import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
+import { AssetItem } from "./AssetItem";
 
 const calculateTotalHoldingsAndTotalValue = (assets) => {
   return assets.reduce((acc, curr) => {
@@ -51,22 +52,23 @@ export const Portfolio = () => {
   const [isOpen, toggleIsOpen] = useModal();
 
   useEffect(() => {
-    if (assetIDs.length > 0) {
-      return Promise.all(
-        assetIDs.map(async (name) => {
-          const response = await fetch(
-            `https://api.coingecko.com/api/v3/coins/${name}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`
-          );
-          const data = await response.json();
-          return data;
-        })
-      )
-        .then((data) => {
-          const formattedData = formatMarketData(data);
-          setMarketData(formattedData);
-        })
-        .catch((err) => console.error(err.message));
+    if (assetIDs.length === 0) {
+      return;
     }
+    return Promise.all(
+      assetIDs.map(async (name) => {
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/coins/${name}?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`
+        );
+        const data = await response.json();
+        return data;
+      })
+    )
+      .then((data) => {
+        const formattedData = formatMarketData(data);
+        setMarketData(formattedData);
+      })
+      .catch((err) => console.error(err.message));
   }, [assetIDs]);
 
   useEffect(() => {
@@ -107,6 +109,20 @@ export const Portfolio = () => {
             <h4>Value</h4>
             <h4>24h change</h4>
           </div>
+          <ul className="assets__list">
+            {calcAssets.map((el, i) => {
+              const market = marketData.find((data) => data.id === el.id);
+              return (
+                <AssetItem
+                  key={i}
+                  data={market}
+                  totalHoldings={el.totalHoldings}
+                  totalValue={el.totalValue}
+                  index={i}
+                />
+              );
+            })}
+          </ul>
         </div>
       </div>
       <ModalController open={isOpen} type="add-asset" onClose={toggleIsOpen} />
