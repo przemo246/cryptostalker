@@ -1,9 +1,11 @@
 export const formatNumber = (num) => {
   let formattedNum;
   if (num.toString().startsWith("0.")) {
-    formattedNum = Number(num);
+    formattedNum = Number(num.toFixed(6));
   } else {
-    formattedNum = Number(num.toFixed(2));
+    formattedNum = new Intl.NumberFormat("en-US").format(
+      Number(num.toFixed(2))
+    );
   }
-  return new Intl.NumberFormat("en-US").format(formattedNum);
+  return formattedNum;
 };
