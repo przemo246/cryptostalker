@@ -1,18 +1,17 @@
-const formatNumber = (num) => {
-  let formattedNum;
-  if (num.toString().startsWith("0.")) {
-    formattedNum = Number(num);
-  } else {
-    formattedNum = Number(num.toFixed(2));
-  }
-  return new Intl.NumberFormat("en-US").format(formattedNum);
-};
+import { formatNumber } from "./utils";
 
 export const AssetItem = (props) => {
   const {
-    data: { id, name, symbol, img, currentPrice, priceChangePerc },
+    data: {
+      id,
+      name,
+      symbol,
+      img,
+      currentPrice,
+      priceChangePerc,
+      totalHoldings,
+    },
     index,
-    totalHoldings,
   } = props;
   return (
     <li className="assets__item" id={id}>
