@@ -11,8 +11,11 @@ export const LoggedUser = () => {
     storage
       .ref(`users/${user?.uid}/profile.jpg`)
       .getDownloadURL()
-      .then((avatarUrl) => setAvatar(avatarUrl))
-      .catch((error) => console.error(error.message));
+      .then((avatarUrl) => {
+        console.log(avatarUrl);
+        setAvatar(avatarUrl);
+      })
+      .catch(() => setAvatar(null));
   }, [user?.uid]);
   return (
     <div className="user-account">
