@@ -96,34 +96,32 @@ export const Portfolio = () => {
             + Add new
           </button>
         </div>
-        <div className="assets">
-          <div className="assets__headings">
-            <h4>#</h4>
-            <h4>Coin</h4>
-            <h4>Ticker</h4>
-            <h4>Price</h4>
-            <h4>Holdings</h4>
-            <h4>Value</h4>
-            <h4>24h change</h4>
+        {loader ? (
+          <Loader
+            type="TailSpin"
+            color="#333"
+            height={70}
+            width={70}
+            visible={loader}
+          />
+        ) : (
+          <div className="assets">
+            <div className="assets__headings">
+              <h4>#</h4>
+              <h4>Coin</h4>
+              <h4>Ticker</h4>
+              <h4>Price</h4>
+              <h4>Holdings</h4>
+              <h4>Value</h4>
+              <h4>24h change</h4>
+            </div>
+            <ul className="assets__list">
+              {assetsAndMarketData.map((data, i) => (
+                <AssetItem key={i} index={i} data={data} />
+              ))}
+            </ul>
           </div>
-          <ul className="assets__list">
-            <>
-              {loader ? (
-                <Loader
-                  type="TailSpin"
-                  color="#333"
-                  height={70}
-                  width={70}
-                  visible={loader}
-                />
-              ) : (
-                assetsAndMarketData.map((data, i) => {
-                  return <AssetItem key={i} index={i} data={data} />;
-                })
-              )}
-            </>
-          </ul>
-        </div>
+        )}
       </div>
       <ModalController open={isOpen} type="add-asset" onClose={toggleIsOpen} />
     </>
