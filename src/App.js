@@ -1,4 +1,4 @@
-import "./App.scss";
+import "./scss/App.scss";
 import homeIcon from "./img/home.svg";
 import rocketIcon from "./img/rocket.svg";
 import pieChartIcon from "./img/pie-chart.svg";
