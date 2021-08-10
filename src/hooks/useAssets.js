@@ -4,18 +4,27 @@ import { useUser } from "./useUser";
 
 const calculateTotalHoldingsAndTotalValue = (assets) => {
   return assets.reduce((acc, curr) => {
-    if (acc.findIndex((el) => el.id === curr.id) !== -1) {
-      const index = acc.findIndex((el) => el.id === curr.id);
+    const index = acc.findIndex((el) => el.id === curr.id);
+    if (index !== -1) {
       acc[index].totalValue += curr.price * curr.holdings;
       acc[index].totalHoldings += curr.holdings;
     } else {
-      const template = {
+      acc.push({
         id: curr.id,
-        totalHoldings: curr.holdings,
         totalValue: curr.price * curr.holdings,
-      };
-      acc.push(template);
+        totalHoldings: curr.holdings,
+      });
     }
+    return acc;
+  }, []);
+};
+
+const calculateAveragePrice = (assets) => {
+  return assets.reduce((acc, curr) => {
+    acc.push({
+      ...curr,
+      avPrice: curr.totalValue / curr.totalHoldings,
+    });
     return acc;
   }, []);
 };
@@ -31,9 +40,13 @@ export const useAssets = () => {
       .onSnapshot((data) => {
         const dataArr = [];
         data.forEach((el) => dataArr.push(el.data()));
-        const calculatedAssets = calculateTotalHoldingsAndTotalValue(dataArr);
+        const calculatedTotalHoldingsAndValue =
+          calculateTotalHoldingsAndTotalValue(dataArr);
+        const calculatedAveragePrice = calculateAveragePrice(
+          calculatedTotalHoldingsAndValue
+        );
         const uniqueAssetIds = Array.from(new Set(dataArr.map((el) => el.id)));
-        setAssets(calculatedAssets);
+        setAssets(calculatedAveragePrice);
         setAssetIds(uniqueAssetIds);
       });
   }, [user?.uid]);
