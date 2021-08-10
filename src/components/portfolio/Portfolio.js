@@ -49,11 +49,11 @@ export const Portfolio = () => {
             const findAsset = assets.find((asset) => asset.id === marketEl.id);
             return {
               ...marketEl,
-              totalHoldings: findAsset.totalHoldings,
-              totalValue: findAsset.totalValue,
+              ...findAsset,
             };
           }
         );
+        console.log(assetsAndFormattedMarketData);
         setAssetsAndMarketData(assetsAndFormattedMarketData);
         setLoader(false);
       } catch (err) {
@@ -64,13 +64,28 @@ export const Portfolio = () => {
   }, [assets, assetIds]);
 
   useEffect(() => {
-    const balance = assetsAndMarketData.reduce((acc, curr) => {
-      acc += curr.totalHoldings * curr.currentPrice;
-      return acc;
-    }, 0);
+    // const balance = assetsAndMarketData.reduce((acc, curr) => {
+    //   acc += curr.totalHoldings * curr.currentPrice;
+    //   return acc;
+    // }, 0);
+    // setSummary((prevSummary) => ({
+    //   ...prevSummary,
+    //   balance: formatNumber(balance),
+    // }));
+    const calcSummary = assetsAndMarketData.reduce(
+      (acc, curr) => {
+        const marketValue = curr.currentPrice * curr.totalHoldings;
+        const buyValue = curr.avPrice * curr.totalHoldings;
+        acc.balance += curr.totalHoldings * curr.currentPrice;
+        acc.profit += marketValue - buyValue;
+        return acc;
+      },
+      { balance: 0, change: 0, profit: 0 }
+    );
     setSummary((prevSummary) => ({
       ...prevSummary,
-      balance: formatNumber(balance),
+      balance: formatNumber(calcSummary.balance),
+      profit: formatNumber(calcSummary.profit),
     }));
   }, [assetsAndMarketData]);
 
