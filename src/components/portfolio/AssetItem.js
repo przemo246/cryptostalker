@@ -1,4 +1,5 @@
 import { formatNumber } from "./utils";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 
 export const AssetItem = (props) => {
   const {
@@ -32,6 +33,12 @@ export const AssetItem = (props) => {
         }
       >
         {priceChangePerc24h.toFixed(2)}%
+      </div>
+      <div>
+        <RiDeleteBack2Fill
+          style={{ cursor: "pointer", fontSize: "1.6rem", color: "#EE2E31" }}
+          title="Delete"
+        />
       </div>
     </li>
   );

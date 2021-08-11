@@ -58,7 +58,7 @@
     justify-items: center;
     align-items: center;
     font-size: 1.4rem;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr) 20px;
     border-bottom: 1px solid $color-grey-light-2;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
