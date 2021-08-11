@@ -14,7 +14,7 @@ export const AddAssetModal = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setValues({ ...values, [name]: value, notification: "" });
     if (name === "id") {
       handleSuggestions(value);
     }
@@ -29,7 +29,7 @@ export const AddAssetModal = () => {
     } else {
       setValues({
         ...values,
-        notification: "Uzupełnij wszystkie pola formularza!",
+        notification: "Fill in all the input fields to proceed!",
       });
     }
   };
