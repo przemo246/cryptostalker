@@ -8,7 +8,7 @@ export const AssetItem = (props) => {
       symbol,
       img,
       currentPrice,
-      priceChangePerc,
+      priceChangePerc24h,
       totalHoldings,
     },
     index,
@@ -28,10 +28,10 @@ export const AssetItem = (props) => {
       <div>{formatNumber(currentPrice * totalHoldings)} USD</div>
       <div
         style={
-          priceChangePerc >= 0 ? { color: "#00AF54" } : { color: "#EE2E31" }
+          priceChangePerc24h >= 0 ? { color: "#00AF54" } : { color: "#EE2E31" }
         }
       >
-        {priceChangePerc.toFixed(2)}%
+        {priceChangePerc24h.toFixed(2)}%
       </div>
     </li>
   );

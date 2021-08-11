@@ -3,7 +3,7 @@ import { useAssets } from "../../hooks/useAssets";
 import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
 import { AssetItem } from "./AssetItem";
-import { formatValue } from "./utils";
+import { formatNumber } from "./utils";
 import Loader from "react-loader-spinner";
 
 const formatMarketData = (marketData) => {
@@ -79,9 +79,9 @@ export const Portfolio = () => {
     );
     setSummary((prevSummary) => ({
       ...prevSummary,
-      balance: formatValue(calcSummary.balance),
-      change: formatValue(calcSummary.change),
-      profit: formatValue(calcSummary.profit),
+      balance: formatNumber(calcSummary.balance),
+      change: formatNumber(calcSummary.change),
+      profit: formatNumber(calcSummary.profit),
     }));
   }, [assetsAndMarketData]);
 
