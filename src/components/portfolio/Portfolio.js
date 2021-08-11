@@ -3,7 +3,7 @@ import { useAssets } from "../../hooks/useAssets";
 import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
 import { AssetItem } from "./AssetItem";
-import { formatNumber } from "./utils";
+import { formatValue } from "./utils";
 import Loader from "react-loader-spinner";
 
 const formatMarketData = (marketData) => {
@@ -14,7 +14,8 @@ const formatMarketData = (marketData) => {
       name: curr.name,
       img: curr.image.thumb,
       currentPrice: curr.market_data.current_price.usd,
-      priceChangePerc: curr.market_data.price_change_percentage_24h,
+      priceChangePerc24h: curr.market_data.price_change_percentage_24h,
+      priceChange24h: curr.market_data.price_change_24h,
     };
     acc.push(formattedData);
     return acc;
@@ -53,7 +54,6 @@ export const Portfolio = () => {
             };
           }
         );
-        console.log(assetsAndFormattedMarketData);
         setAssetsAndMarketData(assetsAndFormattedMarketData);
         setLoader(false);
       } catch (err) {
@@ -64,19 +64,14 @@ export const Portfolio = () => {
   }, [assets, assetIds]);
 
   useEffect(() => {
-    // const balance = assetsAndMarketData.reduce((acc, curr) => {
-    //   acc += curr.totalHoldings * curr.currentPrice;
-    //   return acc;
-    // }, 0);
-    // setSummary((prevSummary) => ({
-    //   ...prevSummary,
-    //   balance: formatNumber(balance),
-    // }));
     const calcSummary = assetsAndMarketData.reduce(
       (acc, curr) => {
         const marketValue = curr.currentPrice * curr.totalHoldings;
         const buyValue = curr.avPrice * curr.totalHoldings;
+        const price24hAgo = curr.currentPrice - curr.priceChange24h;
+        const value24hAgo = price24hAgo * curr.totalHoldings;
         acc.balance += curr.totalHoldings * curr.currentPrice;
+        acc.change += marketValue - value24hAgo;
         acc.profit += marketValue - buyValue;
         return acc;
       },
@@ -84,8 +79,9 @@ export const Portfolio = () => {
     );
     setSummary((prevSummary) => ({
       ...prevSummary,
-      balance: formatNumber(calcSummary.balance),
-      profit: formatNumber(calcSummary.profit),
+      balance: formatValue(calcSummary.balance),
+      change: formatValue(calcSummary.change),
+      profit: formatValue(calcSummary.profit),
     }));
   }, [assetsAndMarketData]);
 
