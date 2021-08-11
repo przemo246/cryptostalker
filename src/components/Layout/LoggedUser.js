@@ -12,7 +12,6 @@ export const LoggedUser = () => {
       .ref(`users/${user?.uid}/profile.jpg`)
       .getDownloadURL()
       .then((avatarUrl) => {
-        console.log(avatarUrl);
         setAvatar(avatarUrl);
       })
       .catch(() => setAvatar(null));
