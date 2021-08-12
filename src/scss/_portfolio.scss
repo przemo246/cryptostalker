@@ -69,6 +69,9 @@
         margin-right: 0.6rem;
       }
     }
+    & div:last-child {
+      @include flex-center;
+    }
   }
   &__list {
     list-style: none;
