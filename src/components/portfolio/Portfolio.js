@@ -128,7 +128,7 @@ export const Portfolio = () => {
             </div>
             <ul className="assets__list">
               {assetsAndMarketData.map((data, i) => (
-                <AssetItem key={i} index={i} data={data} />
+                <AssetItem key={data.id} index={i} data={data} />
               ))}
             </ul>
           </div>
