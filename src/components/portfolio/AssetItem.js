@@ -1,5 +1,5 @@
 import { formatNumber } from "./utils";
-import { RiDeleteBack2Fill } from "react-icons/ri";
+import { BiEdit } from "react-icons/bi";
 
 export const AssetItem = (props) => {
   const {
@@ -35,9 +35,10 @@ export const AssetItem = (props) => {
         {priceChangePerc24h.toFixed(2)}%
       </div>
       <div>
-        <RiDeleteBack2Fill
-          style={{ cursor: "pointer", fontSize: "1.6rem", color: "#EE2E31" }}
-          title="Delete"
+        <BiEdit
+          style={{ cursor: "pointer", fontSize: "1.6rem", color: "#00c590" }}
+          title="Edit"
+          id={id}
         />
       </div>
     </li>
