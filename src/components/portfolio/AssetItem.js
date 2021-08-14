@@ -36,7 +36,7 @@ export const AssetItem = (props) => {
       </div>
       <div>
         <BiEdit
-          style={{ cursor: "pointer", fontSize: "1.6rem", color: "#00c590" }}
+          style={{ cursor: "pointer", fontSize: "1.6rem", color: "#333" }}
           title="Edit"
           id={id}
         />
