@@ -52,7 +52,7 @@ export const AssetItem = (props) => {
         open={isOpen}
         type="edit-asset"
         onClose={toggleIsOpen}
-        id={id}
+        data={{ id, name, symbol, img }}
       />
     </>
   );
