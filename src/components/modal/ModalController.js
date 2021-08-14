@@ -5,7 +5,7 @@ import { RegisterModal } from "./RegisterModal";
 import { AddAssetModal } from "./AddAssetModal";
 import { EditAssetModal } from "./EditAssetModal";
 
-export const ModalController = ({ open, type, onClose, id }) => {
+export const ModalController = ({ open, type, onClose, data }) => {
   if (!open) return null;
   let modal;
   if (type === "login") {
@@ -18,7 +18,7 @@ export const ModalController = ({ open, type, onClose, id }) => {
     modal = <AddAssetModal />;
   }
   if (type === "edit-asset") {
-    modal = <EditAssetModal id={id} />;
+    modal = <EditAssetModal data={data} />;
   }
   return reactDom.createPortal(
     <>
