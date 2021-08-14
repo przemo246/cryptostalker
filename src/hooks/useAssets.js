@@ -36,7 +36,8 @@ export const useAssets = () => {
   const [assetIds, setAssetIds] = useState([]);
   const user = useUser();
   useEffect(() => {
-    db.collection("assets")
+    return db
+      .collection("assets")
       .doc(user?.uid)
       .collection("allassets")
       .onSnapshot((data) => {
