@@ -8,11 +8,13 @@ const calculateTotalHoldingsAndTotalValue = (assets) => {
     if (index !== -1) {
       acc[index].totalValue += curr.price * curr.holdings;
       acc[index].totalHoldings += curr.holdings;
+      acc[index].userData.push(curr);
     } else {
       acc.push({
         id: curr.id,
         totalValue: curr.price * curr.holdings,
         totalHoldings: curr.holdings,
+        userData: [curr],
       });
     }
     return acc;
