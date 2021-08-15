@@ -30,6 +30,10 @@ export const Portfolio = () => {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
+    if (assets.length < 1) {
+      setAssetsAndMarketData([]);
+      return;
+    }
     const getMarketDataAndJoinWithAssets = async () => {
       try {
         const unformattedMarketData = await Promise.all(
@@ -64,6 +68,10 @@ export const Portfolio = () => {
   }, [assets, assetIds]);
 
   useEffect(() => {
+    if (assets.length < 1) {
+      setSummary({ balance: 0, change: 0, profit: 0 });
+      return;
+    }
     const calcSummary = assetsAndMarketData.reduce(
       (acc, curr) => {
         const marketValue = curr.currentPrice * curr.totalHoldings;
@@ -83,7 +91,7 @@ export const Portfolio = () => {
       change: formatNumber(calcSummary.change),
       profit: formatNumber(calcSummary.profit),
     }));
-  }, [assetsAndMarketData]);
+  }, [assetsAndMarketData, assets]);
 
   return (
     <>
