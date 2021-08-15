@@ -9,10 +9,10 @@ export const ModalController = ({ open, type, onClose, data }) => {
   if (!open) return null;
   let modal;
   if (type === "login") {
-    modal = <LoginModal />;
+    modal = <LoginModal onClose={onClose} />;
   }
   if (type === "register") {
-    modal = <RegisterModal />;
+    modal = <RegisterModal onClose={onClose} />;
   }
   if (type === "add-asset") {
     modal = <AddAssetModal />;
