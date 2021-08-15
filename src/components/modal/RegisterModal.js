@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { auth, storage } from "../../firebase.config";
 
-export const RegisterModal = () => {
+export const RegisterModal = ({ onClose }) => {
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -48,6 +48,7 @@ export const RegisterModal = () => {
         if (avatar) {
           addPictureToStorage(token.user.uid, avatar);
         }
+        onClose();
         auth.signOut();
       })
       .catch((err) => setValues({ ...values, error: err.message }));
@@ -58,13 +59,6 @@ export const RegisterModal = () => {
     const { username, email, password } = values;
     if (username && email && password) {
       registerUser(values);
-      setValues({
-        username: "",
-        email: "",
-        password: "",
-        avatar: null,
-        error: "",
-      });
     }
   };
   return (
