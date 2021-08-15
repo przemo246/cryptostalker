@@ -26,7 +26,7 @@ export const Heading = () => {
         </span>
       </h1>
       <span className="greeting-subtitle">
-        this is a greeting in <span id="lang">{greeting.lang}</span> 😉
+        This is a greeting in <span id="lang">{greeting.lang}</span> 😉
       </span>
     </div>
   );
