@@ -4,7 +4,6 @@ import { useModal } from "../../hooks/useModal";
 import { ModalController } from "../modal/ModalController";
 import { AssetItem } from "./AssetItem";
 import { formatNumber } from "./utils";
-import Loader from "react-loader-spinner";
 
 const formatMarketData = (marketData) => {
   return marketData.reduce((acc, curr) => {
@@ -27,7 +26,6 @@ export const Portfolio = () => {
   const [assetsAndMarketData, setAssetsAndMarketData] = useState([]);
   const [summary, setSummary] = useState({ balance: 0, change: 0, profit: 0 });
   const [isOpen, toggleIsOpen] = useModal();
-  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     if (assets.length < 1) {
@@ -59,7 +57,6 @@ export const Portfolio = () => {
           }
         );
         setAssetsAndMarketData(assetsAndFormattedMarketData);
-        setLoader(false);
       } catch (err) {
         console.error(err.message);
       }
@@ -115,32 +112,22 @@ export const Portfolio = () => {
             + Add new
           </button>
         </div>
-        {loader ? (
-          <Loader
-            type="TailSpin"
-            color="#333"
-            height={70}
-            width={70}
-            visible={loader}
-          />
-        ) : (
-          <div className="assets">
-            <div className="assets__headings">
-              <h4>#</h4>
-              <h4>Coin</h4>
-              <h4>Ticker</h4>
-              <h4>Price</h4>
-              <h4>Holdings</h4>
-              <h4>Value</h4>
-              <h4>24h change</h4>
-            </div>
-            <ul className="assets__list">
-              {assetsAndMarketData.map((data, i) => (
-                <AssetItem key={data.id} index={i} data={data} />
-              ))}
-            </ul>
+        <div className="assets">
+          <div className="assets__headings">
+            <h4>#</h4>
+            <h4>Coin</h4>
+            <h4>Ticker</h4>
+            <h4>Price</h4>
+            <h4>Holdings</h4>
+            <h4>Value</h4>
+            <h4>24h change</h4>
           </div>
-        )}
+          <ul className="assets__list">
+            {assetsAndMarketData.map((data, i) => (
+              <AssetItem key={data.id} index={i} data={data} />
+            ))}
+          </ul>
+        </div>
       </div>
       <ModalController open={isOpen} type="add-asset" onClose={toggleIsOpen} />
     </>
