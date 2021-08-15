@@ -38,7 +38,7 @@ export const EditAssetModal = (props) => {
   return (
     <>
       <div className="modal__heading">Edit assets</div>
-      <div className="assets" style={{ width: "100%" }}>
+      <div className="assets" style={{ width: "100%", alignSelf: "baseline" }}>
         <div
           className="assets__headings"
           style={{ gridTemplateColumns: "repeat(5,1fr) 20px" }}
