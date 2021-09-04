@@ -23,7 +23,7 @@ export const News = () => {
     const getNews = async () => {
       const [yesterday, today] = getTodayAndYesterdayDate();
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=crypto&from=${yesterday}&to=${today}&sortBy=popularity&apiKey=715d79a01d574143b994a0dbd3346b9d`
+        `https://us-central1-cryptostalker-18727.cloudfunctions.net/news/?from=${yesterday}&to=${today}`
       );
       const JSON = await response.json();
       const articles = JSON.articles.slice(0, 6);

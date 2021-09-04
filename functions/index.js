@@ -1,9 +1,25 @@
 const functions = require("firebase-functions");
+const cors = require("cors")({ origin: true });
+const { default: axios } = require("axios");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+exports.news = functions.https.onRequest((request, response) => {
+  cors(request, response, () => {
+    const { from, to } = request.query;
+    const config = {
+      headers: {
+        "X-Api-Key": functions.config().news.key,
+      },
+    };
+    axios
+      .get(
+        `https://newsapi.org/v2/everything?q=crypto&from=${from}&to=${to}&sortBy=popularity`,
+        config
+      )
+      .then((res) => {
+        response.send(res.data);
+      })
+      .catch((error) => {
+        response.sendStatus(error);
+      });
+  });
+});
