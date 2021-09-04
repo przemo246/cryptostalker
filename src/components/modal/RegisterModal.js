@@ -21,14 +21,14 @@ export const RegisterModal = ({ onClose }) => {
         (avatar.type.includes("jpg") ||
           avatar.type.includes("png") ||
           avatar.type.includes("jpeg")) &&
-        avatar.size < 200001
+        avatar.size <= 100000
       ) {
         setValues({ ...values, avatar, error: "" });
       } else {
         setValues({
           ...values,
           error:
-            "Accepted file extensions: .jpg, .jpeg, .png and size of maximum 200kB",
+            "Accepted file extensions: .jpg, .jpeg, .png and size of maximum 100kB",
         });
       }
     }
