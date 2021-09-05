@@ -3,7 +3,7 @@ import { useUser } from "../../hooks/useUser";
 
 export const Heading = () => {
   const user = useUser();
-  const [greeting, setGreeting] = useState("");
+  const [greeting, setGreeting] = useState({ greet: "", lang: "" });
   useEffect(() => {
     const greetings = [
       { greet: "Salut", lang: "French" },
