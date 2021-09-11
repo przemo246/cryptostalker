@@ -1,6 +1,9 @@
 .articles {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  @media (max-width: $breakpoint-small) {
+    grid-template-columns: 1fr;
+  }
   &__heading {
     border-bottom: 1px solid $color-grey-light-2;
     padding-bottom: 1rem;
@@ -9,6 +12,9 @@
   }
   &__list {
     margin-left: 3rem;
+    @media (max-width: $breakpoint-small) {
+      margin-left: 0;
+    }
   }
 }
 
