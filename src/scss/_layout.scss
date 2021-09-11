@@ -4,8 +4,12 @@
   display: grid;
   grid-template-columns: minmax(160px, 15vw) 60vw;
   box-shadow: $box-shadow;
+  position: relative;
   @media (max-width: $breakpoint-big) {
     grid-template-columns: minmax(160px, 15vw) 80vw;
+  }
+  @media (max-width: $breakpoint-small) {
+    grid-template-columns: 100vw;
   }
 }
 
@@ -14,12 +18,30 @@
   padding: 8rem 0 1.5rem;
   display: flex;
   flex-direction: column;
+  @media (max-width: $breakpoint-small) {
+    padding: 1.5rem 4rem;
+    position: sticky;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+  }
+  &__hamburger {
+    display: none;
+    @media (max-width: $breakpoint-small) {
+      display: block;
+      @include flex-center;
+    }
+  }
   &__top {
     @include flex-center;
     justify-content: flex-start;
     flex-direction: column;
     flex-grow: 1;
     gap: 5rem;
+    @media (max-width: $breakpoint-small) {
+      justify-content: space-between;
+      flex-direction: row;
+    }
   }
   &__logo {
     width: 92px;
@@ -28,6 +50,9 @@
   &__list {
     list-style: none;
     width: 100%;
+    @media (max-width: $breakpoint-small) {
+      display: none;
+    }
   }
   &__icon {
     width: 2rem;
@@ -77,6 +102,9 @@
   &__link:hover &__icon {
     filter: brightness(1);
   }
+  @media (max-width: $breakpoint-small) {
+    display: none;
+  }
 }
 
 .header {
@@ -87,6 +115,9 @@
   @include flex-center;
   justify-content: space-between;
   z-index: 200;
+  @media (max-width: $breakpoint-small) {
+    padding: 2rem;
+  }
 }
 
 .heading-container {

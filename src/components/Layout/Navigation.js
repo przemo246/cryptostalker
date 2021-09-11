@@ -1,5 +1,6 @@
 import githubIcon from "../../img/github.svg";
 import linkedinIcon from "../../img/linkedin.svg";
+import { GiHamburgerMenu } from "react-icons/gi";
 import logo from "../../img/Logo@2x.png";
 
 export const Navigation = (props) => {
@@ -8,6 +9,9 @@ export const Navigation = (props) => {
       <div className="navigation__top">
         <img src={logo} alt="" className="navigation__logo" />
         <ul className="navigation__list">{props.children}</ul>
+        <div className="navigation__hamburger">
+          <GiHamburgerMenu color="#fff" size="2em" />
+        </div>
       </div>
       <footer className="footer">
         <a

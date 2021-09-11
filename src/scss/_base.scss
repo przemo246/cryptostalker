@@ -28,6 +28,9 @@ $color-grey-dark-1: #616161;
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+  @media (max-width: $breakpoint-small) {
+    font-size: 58%;
+  }
 }
 
 body {
@@ -41,4 +44,7 @@ body {
   background-color: $color-primary;
   position: relative;
   @include flex-center;
+  @media (max-width: $breakpoint-small) {
+    padding: 0;
+  }
 }
