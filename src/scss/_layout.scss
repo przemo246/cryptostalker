@@ -4,6 +4,9 @@
   display: grid;
   grid-template-columns: minmax(160px, 15vw) 60vw;
   box-shadow: $box-shadow;
+  @media (max-width: $breakpoint-big) {
+    grid-template-columns: minmax(160px, 15vw) 80vw;
+  }
 }
 
 .navigation {
