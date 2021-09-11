@@ -1,6 +1,6 @@
-import githubIcon from '../../img/github.svg';
-import linkedinIcon from '../../img/linkedin.svg';
-import logo from '../../img/logo.svg';
+import githubIcon from "../../img/github.svg";
+import linkedinIcon from "../../img/linkedin.svg";
+import logo from "../../img/Logo@2x.png";
 
 export const Navigation = (props) => {
   return (

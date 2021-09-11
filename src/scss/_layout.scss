@@ -18,6 +18,10 @@
     flex-grow: 1;
     gap: 5rem;
   }
+  &__logo {
+    width: 92px;
+    height: 35px;
+  }
   &__list {
     list-style: none;
     width: 100%;
