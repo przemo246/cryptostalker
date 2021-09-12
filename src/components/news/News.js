@@ -20,17 +20,32 @@ export const News = () => {
   const [news, setNews] = useState([]);
   const [loader, setLoader] = useState(true);
   useEffect(() => {
+    const [yesterday, today] = getTodayAndYesterdayDate();
+    const storedArticles = JSON.parse(localStorage.getItem("articles"));
     const getNews = async () => {
-      const [yesterday, today] = getTodayAndYesterdayDate();
       const response = await fetch(
         `https://us-central1-cryptostalker-18727.cloudfunctions.net/news/?from=${yesterday}&to=${today}`
       );
-      const JSON = await response.json();
-      const articles = JSON.articles.slice(0, 6);
+      const data = await response.json();
+      const articles = data.articles.slice(0, 6);
       setLoader(false);
+      localStorage.setItem("articles", JSON.stringify(articles));
       setNews(articles);
     };
-    getNews();
+    if (storedArticles) {
+      const isArticlesUpToDate = storedArticles.every((article) => {
+        const index = article.publishedAt.indexOf("T");
+        return article.publishedAt.slice(0, index) === yesterday || today;
+      });
+      if (isArticlesUpToDate) {
+        setNews(storedArticles);
+        setLoader(false);
+      } else {
+        getNews();
+      }
+    } else {
+      getNews();
+    }
   }, []);
   return (
     <>
