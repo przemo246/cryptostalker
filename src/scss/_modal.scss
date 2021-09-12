@@ -128,4 +128,19 @@ input {
   &__content {
     @include flex-center;
   }
+  &__list {
+    list-style: none;
+  }
+  &__item {
+    cursor: pointer;
+    color: #fff;
+    font-size: 2.6rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2.5rem;
+  }
+  &__icon {
+    margin-right: 2rem;
+    height: 3rem;
+  }
 }
