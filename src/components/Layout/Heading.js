@@ -14,7 +14,7 @@ export const Heading = () => {
       { greet: "Hi", lang: "English" },
       { greet: "Ciao", lang: "Italian" },
     ];
-    const randomNumber = Math.round(Math.random() * greetings.length - 1);
+    const randomNumber = Math.round(Math.random() * (greetings.length - 1));
     setGreeting(greetings[randomNumber]);
   }, []);
   return (
