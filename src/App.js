@@ -14,6 +14,7 @@ import { useUser } from "./hooks/useUser";
 import { News } from "./components/news/News";
 import { TopCrypto } from "./components/top-crypto/TopCrypto";
 import { Portfolio } from "./components/portfolio/Portfolio";
+import { Footer } from "./components/layout/Footer";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
             </Switch>
           </Content>
         </Main>
+        <Footer propsClassName="footer footer__mobile" />
       </Container>
     </Router>
   );

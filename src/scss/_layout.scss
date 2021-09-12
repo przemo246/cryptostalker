@@ -9,7 +9,7 @@
     grid-template-columns: minmax(160px, 15vw) 80vw;
   }
   @media (max-width: $breakpoint-small) {
-    grid-template-columns: 100vw;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -104,6 +104,15 @@
   }
   @media (max-width: $breakpoint-small) {
     display: none;
+  }
+  &__mobile {
+    display: none;
+    @media (max-width: $breakpoint-small) {
+      @include flex-center;
+      background-color: $color-secondary;
+      padding-top: 0;
+      padding: 1rem;
+    }
   }
 }
 
