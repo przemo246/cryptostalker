@@ -4,7 +4,7 @@ import { LoginModal } from "./LoginModal";
 import { RegisterModal } from "./RegisterModal";
 import { AddAssetModal } from "./AddAssetModal";
 import { EditAssetModal } from "./EditAssetModal";
-import { HamburgerMenu } from "./HamburgerMenu";
+import HamburgerMenu from "./HamburgerMenu";
 
 export const ModalController = ({ open, type, onClose, data }) => {
   if (!open) return null;
@@ -22,7 +22,12 @@ export const ModalController = ({ open, type, onClose, data }) => {
     modal = <EditAssetModal data={data} />;
   }
   if (type === "hamburger-menu") {
-    modal = <HamburgerMenu />;
+    return reactDom.createPortal(
+      <>
+        <HamburgerMenu onClose={onClose} />;
+      </>,
+      document.getElementById("modal-root")
+    );
   }
   return reactDom.createPortal(
     <>
