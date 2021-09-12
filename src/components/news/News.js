@@ -23,14 +23,18 @@ export const News = () => {
     const [yesterday, today] = getTodayAndYesterdayDate();
     const storedArticles = JSON.parse(localStorage.getItem("articles"));
     const getNews = async () => {
-      const response = await fetch(
-        `https://us-central1-cryptostalker-18727.cloudfunctions.net/news/?from=${yesterday}&to=${today}`
-      );
-      const data = await response.json();
-      const articles = data.articles.slice(0, 6);
-      setLoader(false);
-      localStorage.setItem("articles", JSON.stringify(articles));
-      setNews(articles);
+      try {
+        const response = await fetch(
+          `https://us-central1-cryptostalker-18727.cloudfunctions.net/news/?from=${yesterday}&to=${today}`
+        );
+        const data = await response.json();
+        const articles = data.articles.slice(0, 6);
+        setLoader(false);
+        localStorage.setItem("articles", JSON.stringify(articles));
+        setNews(articles);
+      } catch (err) {
+        console.log(err);
+      }
     };
     if (storedArticles) {
       const isArticlesUpToDate = storedArticles.every((article) => {
