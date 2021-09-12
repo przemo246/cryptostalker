@@ -39,10 +39,7 @@ export const EditAssetModal = (props) => {
     <>
       <div className="modal__heading">Edit assets</div>
       <div className="assets" style={{ width: "100%", alignSelf: "baseline" }}>
-        <div
-          className="assets__headings"
-          style={{ gridTemplateColumns: "repeat(5,1fr) 20px" }}
-        >
+        <div className="assets__headings assets__headings--small">
           <h4>#</h4>
           <h4>Coin</h4>
           <h4>Ticker</h4>
@@ -54,8 +51,7 @@ export const EditAssetModal = (props) => {
             return (
               <li
                 key={item.timeStamp}
-                className="assets__item"
-                style={{ gridTemplateColumns: "repeat(5,1fr) 20px" }}
+                className="assets__item assets__item--small"
               >
                 <div>{i + 1}</div>
                 <div>
