@@ -17,7 +17,7 @@ import { Portfolio } from "./components/portfolio/Portfolio";
 import { Footer } from "./components/layout/Footer";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function App() {
+export const App = () => {
   const user = useUser();
   return (
     <Router>
@@ -56,7 +56,7 @@ function App() {
                 <TopCrypto />
               </Route>
               <Route path="/portfolio">
-                {user ? <Portfolio /> : <p>Please log in</p>}
+                {user ? <Portfolio /> : <p>Please log in or register</p>}
               </Route>
             </Switch>
           </Content>
@@ -65,6 +65,4 @@ function App() {
       </Container>
     </Router>
   );
-}
-
-export default App;
+};
