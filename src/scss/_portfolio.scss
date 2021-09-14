@@ -69,7 +69,7 @@
     padding-bottom: 1rem;
     margin-bottom: 1rem;
     &--small {
-      grid-template-columns: (5, 1fr) 20px;
+      grid-template-columns: repeat(5, 1fr) 20px;
       @media (max-width: $breakpoint-small) {
         grid-template-columns: 1fr;
       }
