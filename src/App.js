@@ -2,26 +2,23 @@ import "./scss/App.scss";
 import homeIcon from "./img/home.svg";
 import rocketIcon from "./img/rocket.svg";
 import pieChartIcon from "./img/pie-chart.svg";
-import { Navigation } from "./components/layout/Navigation";
-import { Heading } from "./components/layout/Heading";
-import { Container } from "./components/layout/Container";
-import { Content } from "./components/layout/Content";
-import { Main } from "./components/layout/Main";
-import { Header } from "./components/layout/Header";
-import { LoggedUser } from "./components/layout/LoggedUser";
-import { NotLoggedUser } from "./components/layout/NotLoggedUser";
+import { Navigation } from "./components/Layout/Navigation";
+import { Heading } from "./components/Layout/Heading";
+import { Header } from "./components/Layout/Header";
+import { LoggedUser } from "./components/Layout/LoggedUser";
+import { NotLoggedUser } from "./components/Layout/NotLoggedUser";
 import { useUser } from "./hooks/useUser";
 import { News } from "./components/news/News";
 import { TopCrypto } from "./components/top-crypto/TopCrypto";
 import { Portfolio } from "./components/portfolio/Portfolio";
-import { Footer } from "./components/layout/Footer";
+import { Footer } from "./components/Layout/Footer";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export const App = () => {
   const user = useUser();
   return (
     <Router>
-      <Container>
+      <div className="container">
         <Navigation>
           <li className="navigation__item">
             <Link to="/" className="navigation__link">
@@ -42,12 +39,12 @@ export const App = () => {
             </Link>
           </li>
         </Navigation>
-        <Main>
+        <main className="main">
           <Header>
             <Heading />
             {user ? <LoggedUser /> : <NotLoggedUser />}
           </Header>
-          <Content>
+          <section className="content">
             <Switch>
               <Route exact path="/">
                 <News />
@@ -59,10 +56,10 @@ export const App = () => {
                 {user ? <Portfolio /> : <p>Please log in or register</p>}
               </Route>
             </Switch>
-          </Content>
-        </Main>
+          </section>
+        </main>
         <Footer propsClassName="footer footer__mobile" />
-      </Container>
+      </div>
     </Router>
   );
 };
