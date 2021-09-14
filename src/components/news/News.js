@@ -39,7 +39,8 @@ export const News = () => {
     if (storedArticles) {
       const isArticlesUpToDate = storedArticles.every((article) => {
         const index = article.publishedAt.indexOf("T");
-        return article.publishedAt.slice(0, index) === yesterday || today;
+        const publishedAt = article.publishedAt.slice(0, index);
+        return publishedAt === yesterday || publishedAt === today;
       });
       if (isArticlesUpToDate) {
         setNews(storedArticles);
