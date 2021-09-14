@@ -8,11 +8,23 @@ const getTodayAndYesterdayDate = () => {
   const yesterdayDate = new Date();
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   const today = `${currentDate.getFullYear()}-${
-    currentDate.getMonth() + 1
-  }-${currentDate.getDate()}`;
+    currentDate.getMonth() + 1 < 10
+      ? "0" + (currentDate.getMonth() + 1)
+      : currentDate.getMonth()
+  }-${
+    currentDate.getDate() < 10
+      ? "0" + currentDate.getDate()
+      : currentDate.getDate()
+  }`;
   const yesterday = `${yesterdayDate.getFullYear()}-${
-    yesterdayDate.getMonth() + 1
-  }-${yesterdayDate.getDate()}`;
+    yesterdayDate.getMonth() + 1 < 10
+      ? "0" + (yesterdayDate.getMonth() + 1)
+      : yesterdayDate.getMonth() + 1
+  }-${
+    yesterdayDate.getDate() < 10
+      ? "0" + yesterdayDate.getDate()
+      : yesterdayDate.getDate()
+  }`;
   return [yesterday, today];
 };
 
