@@ -3,6 +3,11 @@
   grid-template-rows: auto 1fr;
   align-items: center;
   width: 100%;
+  &__container {
+    @media (max-width: $breakpoint-small) {
+      overflow-y: scroll;
+    }
+  }
   &__heading {
     border-bottom: 1px solid $color-grey-light-2;
     padding-bottom: 1rem;
@@ -14,10 +19,7 @@
     justify-items: center;
     align-items: center;
     font-size: 1.4rem;
-    grid-template-columns: repeat(6, 1fr);
-    @media (max-width: $breakpoint-small) {
-      grid-template-columns: 1fr;
-    }
+    grid-template-columns: repeat(6, minmax(max-content, 1fr));
     border-bottom: 1px solid $color-grey-light-2;
     padding-bottom: 1rem;
     margin-bottom: 1rem;
@@ -31,5 +33,16 @@
   }
   &__list {
     list-style: none;
+  }
+}
+
+.top-crypto {
+  &__item {
+    & div {
+      margin-right: 0.5rem;
+    }
+    & div:nth-child(2) {
+      justify-self: start;
+    }
   }
 }
