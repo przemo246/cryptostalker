@@ -37,7 +37,7 @@ export const TopCrypto = () => {
               Top cryptocurrencies (by market cap.) 🥇
             </h2>
           </div>
-          <div className="top-crypto-container">
+          <div className="top-crypto__container">
             <div className="top-crypto__headings">
               <h4>#</h4>
               <h4>Coin</h4>
