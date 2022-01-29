@@ -10,7 +10,7 @@ const getTodayAndYesterdayDate = () => {
   const today = `${currentDate.getFullYear()}-${
     currentDate.getMonth() + 1 < 10
       ? "0" + (currentDate.getMonth() + 1)
-      : currentDate.getMonth()
+      : currentDate.getMonth() + 1
   }-${
     currentDate.getDate() < 10
       ? "0" + currentDate.getDate()
