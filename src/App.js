@@ -71,6 +71,9 @@ export const App = () => {
               <Route path="/portfolio">
                 {user ? <Portfolio /> : <p>Please log in or register</p>}
               </Route>
+              <Route path="*">
+                <p>404 Not found</p>
+              </Route>
             </Switch>
           </section>
         </main>
