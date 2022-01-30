@@ -1,6 +1,4 @@
-import homeIcon from "../../img/home.svg";
-import rocketIcon from "../../img/rocket.svg";
-import pieChartIcon from "../../img/pie-chart.svg";
+import { ImHome, ImRocket, ImPieChart } from "react-icons/im";
 import { withRouter } from "react-router-dom";
 
 const HamburgerMenu = ({ history, onClose }) => {
@@ -18,21 +16,21 @@ const HamburgerMenu = ({ history, onClose }) => {
       <div className="hamburger__content">
         <ul className="hamburger__list">
           <li className="hamburger__item" onClick={() => pushToRoute("/")}>
-            <img src={homeIcon} alt="" className="hamburger__icon" />
+            <ImHome className="hamburger__icon" />
             Home
           </li>
           <li
             className="hamburger__item"
             onClick={() => pushToRoute("/top-crypto")}
           >
-            <img src={rocketIcon} alt="" className="hamburger__icon" />
+            <ImRocket className="hamburger__icon" />
             Top Crypto
           </li>
           <li
             className="hamburger__item"
             onClick={() => pushToRoute("/portfolio")}
           >
-            <img src={pieChartIcon} alt="" className="hamburger__icon" />
+            <ImPieChart className="hamburger__icon" />
             Portfolio
           </li>
         </ul>
