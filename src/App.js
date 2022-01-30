@@ -25,6 +25,7 @@ export const App = () => {
         <Navigation>
           <li className="navigation__item">
             <NavLink
+              exact
               to="/"
               activeClassName="navigation__link--active"
               className="navigation__link"
