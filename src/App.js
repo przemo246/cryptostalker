@@ -1,7 +1,5 @@
 import "./scss/App.scss";
-import homeIcon from "./img/home.svg";
-import rocketIcon from "./img/rocket.svg";
-import pieChartIcon from "./img/pie-chart.svg";
+import { ImHome, ImRocket, ImPieChart } from "react-icons/im";
 import { Navigation } from "./components/Layout/Navigation";
 import { Heading } from "./components/Layout/Heading";
 import { Header } from "./components/Layout/Header";
@@ -12,7 +10,12 @@ import { News } from "./components/news/News";
 import { TopCrypto } from "./components/top-crypto/TopCrypto";
 import { Portfolio } from "./components/portfolio/Portfolio";
 import { Footer } from "./components/Layout/Footer";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from "react-router-dom";
 
 export const App = () => {
   const user = useUser();
@@ -21,22 +24,34 @@ export const App = () => {
       <div className="container">
         <Navigation>
           <li className="navigation__item">
-            <Link to="/" className="navigation__link">
-              <img src={homeIcon} alt="" className="navigation__icon" />
+            <NavLink
+              to="/"
+              activeClassName="navigation__link--active"
+              className="navigation__link"
+            >
+              <ImHome className="navigation__icon" />
               Home
-            </Link>
+            </NavLink>
           </li>
           <li className="navigation__item">
-            <Link to="/top-crypto" className="navigation__link">
-              <img src={rocketIcon} alt="" className="navigation__icon" />
+            <NavLink
+              to="/top-crypto"
+              activeClassName="navigation__link--active"
+              className="navigation__link"
+            >
+              <ImRocket className="navigation__icon" />
               Top crypto
-            </Link>
+            </NavLink>
           </li>
           <li className="navigation__item">
-            <Link to="/portfolio" className="navigation__link">
-              <img src={pieChartIcon} alt="" className="navigation__icon" />
+            <NavLink
+              to="/portfolio"
+              activeClassName="navigation__link--active"
+              className="navigation__link"
+            >
+              <ImPieChart className="navigation__icon" />
               Portfolio
-            </Link>
+            </NavLink>
           </li>
         </Navigation>
         <main className="main">
