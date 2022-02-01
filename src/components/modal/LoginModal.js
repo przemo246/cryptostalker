@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ButtonGreen from "../atoms/ButtonGreen";
 import { auth } from "../../firebase.config";
 
 export const LoginModal = ({ onClose }) => {
@@ -50,9 +51,7 @@ export const LoginModal = ({ onClose }) => {
           value={values.password}
           onChange={handleChange}
         />
-        <button className="btn btn-green" type="submit" onClick={handleSubmit}>
-          OK
-        </button>
+        <ButtonGreen text="OK" handleOnClick={handleSubmit} />
         <div className="notification">{values.notification}</div>
       </form>
     </>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { auth, storage } from "../../firebase.config";
+import ButtonGreen from "../atoms/ButtonGreen";
 
 export const RegisterModal = ({ onClose }) => {
   const [values, setValues] = useState({
@@ -103,9 +104,7 @@ export const RegisterModal = ({ onClose }) => {
           name="avatar"
           onChange={handleFileChange}
         />
-        <button className="btn btn-green" type="submit" onClick={handleSubmit}>
-          OK
-        </button>
+        <ButtonGreen text="OK" handleOnClick={handleSubmit} />
         <div className="notification">{values.error}</div>
       </form>
     </>
