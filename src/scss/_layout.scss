@@ -88,16 +88,32 @@
 
 .footer {
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: flex-end;
+  flex-direction: column;
   flex-grow: 1;
-  padding-top: 10rem;
+  text-align: center;
+  color: $color-grey-dark-2;
+  font-size: 1.3rem;
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.6rem;
+  }
   &__icon {
     width: 1.5rem;
     height: 1.5rem;
     filter: brightness(0.35);
-    transition: all 0.2s;
+    transition: filter 0.2s;
+  }
+  &__link {
+    color: $color-grey-dark-2;
+    text-decoration: none;
+    transition: color 0.2s;
+    &:hover {
+      color: #fff;
+    }
   }
   &__link:hover &__icon {
     filter: brightness(1);
