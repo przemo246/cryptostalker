@@ -41,6 +41,7 @@ export const LoginModal = ({ onClose }) => {
           id="email"
           value={values.email}
           onChange={handleChange}
+          required
         />
         <label htmlFor="username">Password</label>
         <input
@@ -50,6 +51,8 @@ export const LoginModal = ({ onClose }) => {
           id="password"
           value={values.password}
           onChange={handleChange}
+          required
+          autoComplete="on"
         />
         <ButtonGreen text="OK" handleOnClick={handleSubmit} />
         <div className="notification">{values.notification}</div>

@@ -94,6 +94,7 @@ export const RegisterModal = ({ onClose }) => {
           id="password"
           value={values.password}
           onChange={handleChange}
+          autoComplete="on"
           required
         />
         <label htmlFor="avatar">Avatar (optional)</label>
