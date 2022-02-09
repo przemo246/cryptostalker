@@ -55,13 +55,14 @@
 }
 
 .assets {
+  overflow-x: auto;
   &__headings,
   &__item {
     display: grid;
     justify-items: center;
     align-items: center;
     font-size: 1.4rem;
-    grid-template-columns: repeat(7, minmax(max-content, 1fr)) 20px;
+    grid-template-columns: repeat(7, minmax(10rem, 1fr)) 20px;
     border-bottom: 1px solid $color-grey-light-2;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -83,5 +84,6 @@
   }
   &__list {
     list-style: none;
+    width: fit-content;
   }
 }
