@@ -21,8 +21,8 @@ You can remove desired elements of given cryptocurrency and the dashboard will r
 
 ## Technologies
 
-* React 17
-* Firebase 8 (Firestore Database, Functions, Storage and Hosting)
+* React
+* Firebase (Firestore Database, Functions, Storage and Hosting)
 * Sass (SCSS)
 
 ## Setup
@@ -32,6 +32,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Further development plans
 
-* Mobile / tablet version
-* Add TypeScript
-* Test components using Storybook
+* Mobile / tablet version ✔
+* Authentication via Google and GitHub
