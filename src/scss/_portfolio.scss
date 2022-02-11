@@ -56,6 +56,11 @@
 
 .assets {
   overflow-x: auto;
+  &__headings {
+    @media (max-width: $breakpoint-small) {
+      width: fit-content;
+    }
+  }
   &__headings,
   &__item {
     display: grid;
