@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { db } from "../../firebase.config";
 import { useUser } from "../../hooks/useUser";
+import { useGetAssetIds } from "../../hooks/useGetAssetIds";
 
 export const AddAssetModal = () => {
   const user = useUser();
+  const assetIds = useGetAssetIds();
   const [values, setValues] = useState({
     id: "",
     price: "",
@@ -24,30 +26,32 @@ export const AddAssetModal = () => {
     e.preventDefault();
     const { id, price, holdings } = values;
     if (id && price && holdings) {
-      addAssetToDb(id, +price, +holdings);
-      setValues({ id: "", price: "", holdings: "", notification: "" });
+      if (assetIds.includes(id)) {
+        addAssetToDb(id, +price, +holdings);
+        setValues({ id: "", price: "", holdings: "", notification: "" });
+      } else {
+        setValues({
+          ...values,
+          notification: "Use asset id from the dropdown list.",
+        });
+      }
     } else {
       setValues({
         ...values,
-        notification: "Fill in all the input fields to proceed!",
+        notification: "Fill in all the input fields to proceed.",
       });
     }
   };
 
   const handleSuggestions = (value) => {
-    fetch("https://api.coingecko.com/api/v3/coins/")
-      .then((data) => data.json())
-      .then((res) => {
-        const matches = res.filter((el) => {
-          const regex = new RegExp(`^${value}`, "gi");
-          return el.name.match(regex) || el.symbol.match(regex);
-        });
-        setSuggestions(matches);
-        if (value.length === 0) {
-          setSuggestions([]);
-        }
-      })
-      .catch((err) => console.error(err.message));
+    const matches = assetIds.filter((el) => {
+      const regex = new RegExp(`^${value}`, "gi");
+      return el.name.match(regex) || el.symbol.match(regex);
+    });
+    setSuggestions(matches);
+    if (value.length === 0) {
+      setSuggestions([]);
+    }
   };
   const getAssetId = (e) => {
     setValues({ ...values, id: e.target.id });
