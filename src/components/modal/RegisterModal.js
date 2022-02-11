@@ -15,19 +15,28 @@ export const RegisterModal = ({ onClose }) => {
     setValues({ ...values, [name]: value });
   };
 
+  const isAvatarMeetRequirements = (a) => {
+    if (
+      (a.type.includes("jpg") ||
+        a.type.includes("png") ||
+        a.type.includes("jpeg")) &&
+      a.size <= 100000
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handleFileChange = (e) => {
     const avatar = e.target.files[0];
     if (avatar) {
-      if (
-        (avatar.type.includes("jpg") ||
-          avatar.type.includes("png") ||
-          avatar.type.includes("jpeg")) &&
-        avatar.size <= 100000
-      ) {
+      if (isAvatarMeetRequirements(avatar)) {
         setValues({ ...values, avatar, error: "" });
       } else {
         setValues({
           ...values,
+          avatar,
           error:
             "Accepted file extensions: .jpg, .jpeg, .png and size of maximum 100kB",
         });
@@ -46,7 +55,7 @@ export const RegisterModal = ({ onClose }) => {
         token.user.updateProfile({
           displayName: username,
         });
-        if (avatar) {
+        if (avatar && isAvatarMeetRequirements(avatar)) {
           addPictureToStorage(token.user.uid, avatar);
         }
         onClose();
@@ -57,8 +66,16 @@ export const RegisterModal = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, email, password } = values;
-    if (username && email && password) {
+    const { username, email, password, avatar } = values;
+    if (
+      username &&
+      email &&
+      password &&
+      avatar &&
+      isAvatarMeetRequirements(avatar)
+    ) {
+      registerUser(values);
+    } else if (username && email && password && avatar === null) {
       registerUser(values);
     }
   };
