@@ -26,7 +26,8 @@ export const AddAssetModal = () => {
     e.preventDefault();
     const { id, price, holdings } = values;
     if (id && price && holdings) {
-      if (assetIds.includes(id)) {
+      const findId = assetIds.find((obj) => obj.id === id);
+      if (findId) {
         addAssetToDb(id, +price, +holdings);
         setValues({ id: "", price: "", holdings: "", notification: "" });
       } else {
