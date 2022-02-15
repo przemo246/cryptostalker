@@ -57,7 +57,7 @@
 .assets {
   overflow-x: auto;
   &__headings {
-    @media (max-width: $breakpoint-small) {
+    @media (max-width: $breakpoint-xsmall) {
       width: fit-content;
     }
   }
@@ -89,6 +89,8 @@
   }
   &__list {
     list-style: none;
-    width: fit-content;
+    @media (max-width: $breakpoint-xsmall) {
+      width: fit-content;
+    }
   }
 }
